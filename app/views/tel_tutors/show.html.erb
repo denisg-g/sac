@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @tel_tutor.tipo %>
+</p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @tel_tutor.numero %>
+</p>
+
+<p>
+  <strong>Tutor:</strong>
+  <%= @tel_tutor.tutor %>
+</p>
+
+<%= link_to 'Edit', edit_tel_tutor_path(@tel_tutor) %> |
+<%= link_to 'Back', tel_tutors_path %>

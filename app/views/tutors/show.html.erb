@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @tutor.tipo_id %>
+</p>
+
+<p>
+  <strong>Cedula:</strong>
+  <%= @tutor.cedula %>
+</p>
+
+<p>
+  <strong>First:</strong>
+  <%= @tutor.first %>
+</p>
+
+<p>
+  <strong>Second:</strong>
+  <%= @tutor.second %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @tutor.apellido %>
+</p>
+
+<p>
+  <strong>Apellido1:</strong>
+  <%= @tutor.apellido1 %>
+</p>
+
+<p>
+  <strong>Tipotutor:</strong>
+  <%= @tutor.tipotutor %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @tutor.email %>
+</p>
+
+<p>
+  <strong>Direction:</strong>
+  <%= @tutor.direction %>
+</p>
+<h2>telefono del tutor</h2>
+<% if @tutor.tel_tutors.any? %>
+  <ul>
+  <% @tutor.tel_tutors.each do |tel| %>
+    <li> <%= tel.tipo  %> <%= tel.numero  %></li>
+
+    <% end %>
+  </ul>
+<% else %>
+  <p>no disponible</p>
+<% end %>
+<%= link_to 'Edit', edit_tutor_path(@tutor) %> |
+<%= link_to 'Back', tutors_path %>

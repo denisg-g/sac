@@ -1,0 +1,64 @@
+<%= form_for(@tutor) do |f| %>
+  <% if @tutor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tutor.errors.count, "error") %> prohibited this tutor from being saved:</h2>
+
+      <ul>
+      <% @tutor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tipo_id %><br>
+    <%= f.text_field :tipo_id %>
+  </div>
+  <div class="field">
+    <%= f.label :cedula %><br>
+    <%= f.text_field :cedula %>
+  </div>
+  <div class="field">
+    <%= f.label :first %><br>
+    <%= f.text_field :first %>
+  </div>
+  <div class="field">
+    <%= f.label :second %><br>
+    <%= f.text_field :second %>
+  </div>
+  <div class="field">
+    <%= f.label :apellido %><br>
+    <%= f.text_field :apellido %>
+  </div>
+  <div class="field">
+    <%= f.label :apellido1 %><br>
+    <%= f.text_field :apellido1 %>
+  </div>
+  <div class="field">
+    <%= f.label :tipotutor %><br>
+    <%= f.text_field :tipotutor %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :direction %><br>
+    <%= f.text_field :direction %>
+  </div>
+  <h2>telefonos</h2>
+  <%= f.fields_for :tel_tutors do |tel| %>
+    <div class="fields">
+    tipo
+      <%= tel.text_field :tipo %>
+      numero
+      <%= tel.number_field :numero %>  
+      <%= tel.hidden_field :_destroy %> 
+      <%= link_to "Eliminar","#",:onclick => "remove_fields(this)", data: { turbolinks: false } %>  
+    </div>
+    <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<%= form_for(@tel_tutor) do |f| %>
+  <% if @tel_tutor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tel_tutor.errors.count, "error") %> prohibited this tel_tutor from being saved:</h2>
+
+      <ul>
+      <% @tel_tutor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tipo %><br>
+    <%= f.text_field :tipo %>
+  </div>
+  <div class="field">
+    <%= f.label :numero %><br>
+    <%= f.number_field :numero %>
+  </div>
+  <div class="field">
+    <%= f.label :tutor_id %><br>
+    <%= f.text_field :tutor_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

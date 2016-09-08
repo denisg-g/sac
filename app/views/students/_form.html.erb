@@ -1,0 +1,52 @@
+<%= form_for(@student) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :carnet %><br>
+    <%= f.text_field :carnet %>
+  </div>
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :nombre1 %><br>
+    <%= f.text_field :nombre1 %>
+  </div>
+  <div class="field">
+    <%= f.label :apellido %><br>
+    <%= f.text_field :apellido %>
+  </div>
+  <div class="field">
+    <%= f.label :apellido1 %><br>
+    <%= f.text_field :apellido1 %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :direction %><br>
+    <%= f.text_field :direction %>
+  </div>
+  <div class="field">
+    <%= f.label :estado %><br>
+    <%= f.number_field :estado %>
+  </div>
+  tutors
+  <%= f.collection_select :tutor_ids, @tutors, :id,:first,{},{:multiple=>true} %>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

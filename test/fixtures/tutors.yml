@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tipo_id: MyString
+  cedula: MyString
+  first: MyString
+  second: MyString
+  apellido: MyString
+  apellido1: MyString
+  tipotutor: MyString
+  email: MyString
+  direction: MyString
+
+two:
+  tipo_id: MyString
+  cedula: MyString
+  first: MyString
+  second: MyString
+  apellido: MyString
+  apellido1: MyString
+  tipotutor: MyString
+  email: MyString
+  direction: MyString

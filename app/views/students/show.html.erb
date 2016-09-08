@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Carnet:</strong>
+  <%= @student.carnet %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @student.nombre %>
+</p>
+
+<p>
+  <strong>Nombre1:</strong>
+  <%= @student.nombre1 %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @student.apellido %>
+</p>
+
+<p>
+  <strong>Apellido1:</strong>
+  <%= @student.apellido1 %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @student.email %>
+</p>
+
+<p>
+  <strong>Direction:</strong>
+  <%= @student.direction %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @student.estado %>
+</p>
+
+tutor 
+<% @student.tutors.each do |e| %>
+<%= e.first  %><br>
+<% end  %>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>
