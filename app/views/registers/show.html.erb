@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @register.student_id %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @register.year %>
+</p>
+
+<p>
+  <strong>Colegio precedencia:</strong>
+  <%= @register.colegio_precedencia %>
+</p>
+
+<p>
+  <strong>Pago:</strong>
+  <%= @register.pago %>
+</p>
+
+<p>
+  <strong>Repitente:</strong>
+  <%= @register.repitente %>
+</p>
+
+<p>
+  <strong>Extracurricular:</strong>
+  <%= @register.extracurricular %>
+</p>
+
+<%= link_to 'Edit', edit_register_path(@register) %> |
+<%= link_to 'Back', registers_path %>

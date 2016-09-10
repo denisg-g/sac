@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student_id_id: 
+  year: MyString
+  colegio_precedencia: MyString
+  pago: false
+  repitente: MyString
+  extracurricular: MyString
+
+two:
+  student_id_id: 
+  year: MyString
+  colegio_precedencia: MyString
+  pago: false
+  repitente: MyString
+  extracurricular: MyString

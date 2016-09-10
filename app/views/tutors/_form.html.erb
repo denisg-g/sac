@@ -48,17 +48,37 @@
     <%= f.text_field :direction %>
   </div>
   <h2>telefonos</h2>
+  <!--
   <%= f.fields_for :tel_tutors do |tel| %>
     <div class="fields">
-    tipo
+      tipo
       <%= tel.text_field :tipo %>
       numero
       <%= tel.number_field :numero %>  
       <%= tel.hidden_field :_destroy %> 
-      <%= link_to "Eliminar","#",:onclick => "remove_fields(this)", data: { turbolinks: false } %>  
+      <%= link_to "Eliminar","#",:onclick => "remove_fields(this)", data: { turbolinks: false }, :class => "agrega"  %>  
+      <br class="separador">
+    </div>
+    <% end %>-->
+
+  <%= f.fields_for :tel_tutors do |tel| %>
+    <div class="fields">
+      tipo
+      <%= tel.text_field :tipo %>
+      numero
+      <%= tel.number_field :numero %>  
+      <%= tel.hidden_field :_destroy %> 
+      <%= link_to "Eliminar","#",:onclick => "remove_fieldss(this)", data: { turbolinks: false }, :class => "agrega"  %>  
+      <br class="separador">
     </div>
     <% end %>
+
+    <div id="addressHeader" style="display:none"> 
+    </div>
+    <ul id="myList">
+  </ul>
+    <%= link_to "agregar","#",:onclick => "addFields()", data: { turbolinks: false }%>
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+<% end %> 
