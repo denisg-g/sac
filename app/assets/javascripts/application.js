@@ -60,7 +60,7 @@ function addFields() {
   	linkdele.appendChild(tn);
     linkdele.setAttribute("onclick", "remove_fields(this)");
     linkdele.setAttribute("data-turbolinks", false);
-    linkdele.setAttribute("href", "javascript:void(0);");
+    linkdele.setAttribute("href", "javascript:;");
     li.appendChild(linkdele);
     document.getElementById("myList").appendChild(li);
     $("#addressHeader").show(); 

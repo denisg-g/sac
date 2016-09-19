@@ -68,7 +68,7 @@
       numero
       <%= tel.number_field :numero %>  
       <%= tel.hidden_field :_destroy %> 
-      <%= link_to "Eliminar","#",:onclick => "remove_fieldss(this)", data: { turbolinks: false }, :class => "agrega"  %>  
+      <%= link_to "Eliminar","javascript:;",:onclick => "remove_fieldss(this)", data: { turbolinks: false }, :class => "agrega"  %>  
       <br class="separador">
     </div>
     <% end %>
@@ -77,7 +77,7 @@
     </div>
     <ul id="myList">
   </ul>
-    <%= link_to "agregar","#",:onclick => "addFields()", data: { turbolinks: false }%>
+    <%= link_to "agregar","javascript:;",:onclick => "addFields()", data: { turbolinks: false }%>
   <div class="actions">
     <%= f.submit %>
   </div>
