@@ -56,4 +56,4 @@ tutor
 <%= link_to "Matricular",new_register_path(:id_student => @student.id),{:title=> "Asignar",:class=>"btn glyphicon glyphicon glyphicon-pushpin",:style=>"float:left"} %>
 <% end %>
 <%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="top:-124px;left:70px;position:relative;">Atrás</a>

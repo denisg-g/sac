@@ -35,7 +35,16 @@
     <%= f.label :extracurricular %><br>
     <%= f.text_field :extracurricular %>
   </div>
+  <%= fields_for :students  do |stu| %>
+    <div class="fields">
+      grupo
+  <%= stu.collection_select :group_id, @groups, :id,:name,{},{:multiple=>true} %>
+      <br class="separador">
+
+    </div>
+    <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(:id_student=>params[:id_student]) %>
+
   </div>
 <% end %>

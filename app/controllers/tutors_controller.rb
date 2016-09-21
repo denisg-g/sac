@@ -1,6 +1,6 @@
 class TutorsController < ApplicationController
   before_action :set_tutor, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /tutors
   # GET /tutors.json
   def index

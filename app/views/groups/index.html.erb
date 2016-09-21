@@ -26,6 +26,18 @@
         <td><%= link_to 'Edit', edit_group_path(group) %></td>
         <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% group.students do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= student.seccion %></td>
+        <td><%= student.max %></td>
+        <td><%= student.turno %></td>
+        <td><%= student.tipo %></td>
+        <td><%= link_to 'Show', student %></td>
+        <td><%= link_to 'Edit', edit_student_path(students) %></td>
+        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
@@ -33,3 +45,4 @@
 <br>
 
 <%= link_to 'New Group', new_group_path %>
+<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="top:-124px;left:70px;position:relative;">Atrás</a>

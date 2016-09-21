@@ -1,6 +1,6 @@
 class TelTutorsController < ApplicationController
   before_action :set_tel_tutor, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /tel_tutors
   # GET /tel_tutors.json
   def index

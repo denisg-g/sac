@@ -1,6 +1,6 @@
 class RegistersController < ApplicationController
   before_action :set_register, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /registers
   # GET /registers.json
   def index
@@ -15,17 +15,20 @@ class RegistersController < ApplicationController
   # GET /registers/new
   def new
     @register = Register.new
+    @groups = Group.all
+    @student = Student.find(params[:id_student])
   end
 
   # GET /registers/1/edit
   def edit
+
   end
 
   # POST /registers
   # POST /registers.json
   def create
     @register = Register.new(register_params)
-
+    Student.where("id = ?",@student.id).update_all(:group_id=>@studen.group.id)
     respond_to do |format|
       if @register.save
         format.html { redirect_to @register, notice: 'Register was successfully created.' }
