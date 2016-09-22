@@ -38,13 +38,13 @@
   <%= fields_for :students  do |stu| %>
     <div class="fields">
       grupo
-  <%= stu.collection_select :group_id, @groups, :id,:name,{},{:multiple=>true} %>
+  <%= select_tag "grupo", options_from_collection_for_select(@groups, "id", "name") %>
       <br class="separador">
 
     </div>
     <% end %>
   <div class="actions">
-    <%= f.submit(:id_student=>params[:id_student]) %>
+    <%= f.button :submit,name: "student_id",value: params[:id_student] %>
 
   </div>
 <% end %>

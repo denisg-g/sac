@@ -16,7 +16,6 @@ class RegistersController < ApplicationController
   def new
     @register = Register.new
     @groups = Group.all
-    @student = Student.find(params[:id_student])
   end
 
   # GET /registers/1/edit
@@ -28,7 +27,7 @@ class RegistersController < ApplicationController
   # POST /registers.json
   def create
     @register = Register.new(register_params)
-    Student.where("id = ?",@student.id).update_all(:group_id=>@studen.group.id)
+    Student.where("id = ?",params[:student_id]).update_all(:group_id=>params[:grupo])
     respond_to do |format|
       if @register.save
         format.html { redirect_to @register, notice: 'Register was successfully created.' }
