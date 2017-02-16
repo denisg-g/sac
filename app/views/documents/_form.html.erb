@@ -1,0 +1,76 @@
+<%= register = Register.maximum(:id).next %>
+<%= student = Student.maximum(:id).next %>
+
+<%= form_for($document) do |f| %>
+<div class="actions" style="top: 10px;position: relative;">
+<%= submit_tag "Guardar", id: "save",:class=>"btn btn-default btn-md" %>
+</div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#nuevo" aria-controls="nuevo" role="tab" data-toggle="tab">Nuevo Ingreso </a></li>
+    <li role="presentation"><a href="#reing" aria-controls="reing" role="tab" data-toggle="tab">Re-ingreso</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="nuevo">
+      <div class="hide">
+        <%= f.text_field :student_id, :value => student %>
+        <%= f.text_field :year, :value => Time.now.year %>
+      </div>
+      <div class="field col-md-3">
+        <%= f.label :colegio_precedencia %><br>
+        <%= f.text_field :colegio_precedencia,:autofocus=>"true" %>
+      </div>
+      <div class="field col-md-3">asdfas
+        <%= f.label :pago %><br>
+        <%= f.check_box :pago %>
+      </div>
+      <div class="field col-md-3">
+        <%= f.label :repitente %><br>
+        <%= f.text_field :repitente %>
+      </div>sdfasfdad
+      <div class="field col-md-3">
+        <%= f.label :extracurricular %><br>
+        <%= f.text_field :extracurricular %>
+      </div>
+      <%= fields_for :students  do |stu| %>
+      <div class="fields">
+          grupo
+      <%= select_tag "grupo", options_from_collection_for_select(@grupo, "id", "tname") %>
+      </div>
+      </div>
+
+      <div class="field col-md-3">
+        <%= f.label :Nombre %><br>asdf
+        <%= f.text_field :name ,:class=>"form-control",:autofocus=>"true" %>
+      </div>
+      <div class="field col-md-1">
+        <%= f.check_box :status,:class=>"form-control" %>
+      </div>
+      <div class="field col-md-3">
+        <%= f.label :descipcion  %><br>
+        <%= f.text_field :description,:class=>"form-control" %>
+      </div>
+      <div class="field col-md-3 hidden ">
+        <%= f.label :total %><br>
+        <%= f.text_field :register_id,:class=>"form-control",:value=>register %> 
+      </div>
+
+    <div role="tabpanel" class="tab-pane" id="reing">
+      
+  <%= Time.now.year+1 %>
+  <div class="field">
+
+    <%= f.label :Nueva  %><br>asdfasdf
+    <%= f.select :year,([['Matricula', Time.now.year], ['Pre Matricula', Time.now.year+1]]),{}, {:class=> "form-control",:style=>"float:left;width:30%" }%><br><br>
+  </div>
+  
+  <% end %>
+    </div>
+</div>
+
+    
+
+    
+<% end %>

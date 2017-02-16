@@ -1,46 +1,195 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Groups</h1>
 
-<table>
+<h1>Grupos</h1>
+<%= paginate(@groups) %>
+<% @groups.each do |group| %>
+<div class="panel panel-default">
+
+  <!-- Default panel contents -->
+  <div class="panel-heading"><%= group.name %> <%= group.seccion %> <div class="right"><%= link_to 'Ver', group ,:onclick=>"location.reload();",:class=>"btn btn-primary btn-md"%> <%= link_to 'Editar', edit_group_path(group) ,:onclick=>"location.reload();",:class=>"btn btn-primary btn-md"%> <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } ,:class=>"btn btn-primary btn-md"%></div></div>
+  <div class="panel-body">
+    <strong>Máximo:</strong> <%= group.max %>
+    <strong>Turno:</strong> <%= group.turno %>
+    <strong>Tipo:</strong> <%= group.tipo %>
+    <strong>Estudiantes Matriculados:</strong> <%= group.students.count %>
+    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal<%= group.id %>">
+          Horario
+        </button>
+        <%= link_to 'Agregar asignatura', new_subject_path(:group_id =>group.id),:onclick=>"location.reload();" ,:class=>"btn btn-primary btn-md"%>
+  </div>
+  <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Seccion</th>
-      <th>Max</th>
-      <th>Turno</th>
-      <th>Tipo</th>
-      <th colspan="3"></th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>email</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.name %></td>
-        <td><%= group.seccion %></td>
-        <td><%= group.max %></td>
-        <td><%= group.turno %></td>
-        <td><%= group.tipo %></td>
-        <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <% group.students.each do |student| %>
+    <tr>
+        <td><%= student.nombre %> <%= student.nombre1 %></td>
+        <td><%= student.apellido %> <%= student.apellido1 %></td>
+        <td><%= student.email %></td>
+        <td><%= link_to student,:title=>"Mostrar" do%>
+          <span class="fa fa-eye btn btn-default btn-md"></span> <% end %>
+        </td>
+        <td><%= link_to edit_student_path(student),:title=>"Editar" do%>
+          <span class="fa fa-pencil-square-o btn btn-default btn-md"></span> <% end %></td>
+        <td><%= link_to student, method: :delete,:title=>"Eliminar", data: { confirm: '¿Estás seguro?' } do  %><span class="fa fa-trash btn-default btn btn-md"></span>
+          <% end %></td>
       </tr>
-      <% group.students.each do |student| %>
-      <tr>
-        <td><%= student.nombre %></td>
-        <td><%= student.apellido %></td>
-        <td><%= student.group.name %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  
+  <% end %>
+  </tbody>
+      
+      
+  <!-- Table -->
+  
+  </table>
+
+</div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal<%= group.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Materias para <%= group.name %> <%= group.seccion %></h4>
+              </div>
+              <div class="modal-body">
+              <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Lunes</th>
+                  <th>Martes</th>
+                  <th>Miercoles</th>
+                  <th>Jueves</th>
+                  <th>Viernes</th>
+                </tr>
+              </thead>
+              <% conta = 0 %>
+              <% array = Array.new(7){Array.new(5)} %>
+              <% group.subjects.each do |mat| %>
+                <% mat.schedule_days.each do |sd| %>
+                  <% sd.schedule_blocks.each do |sb| %>
+
+                    
+                    <% if sd.name == "Lunes" %>
+                      <% array[0][sb.name.to_i-1] = mat.name %>
+                    <% end %>
+                    <% if sd.name == "Martes"  %>
+                      <% array[1][sb.name.to_i-1] = mat.name %>
+                    <% end %>
+                    <% if sd.name == "Miercoles" %>
+                      <% array[2][sb.name.to_i-1] = mat.name %>
+                    <% end %>
+                    <% if sd.name == "Jueves"  %>
+                      <% array[3][sb.name.to_i-1] = mat.name %>
+                    <% end %>
+                    <% if sd.name == "Viernes" %>
+                      <% array[4][sb.name.to_i-1] = mat.name %>
+                    <% end %>
+                    
+                  <% end %>
+                
+                <% end %>
+
+              <% end %>
+              <tbody>
+              <tr>
+              <td>1 </td>
+              <td><%= array[0][0]  %></td>
+              <td><%= array[1][0]  %></td>
+              <td><%= array[2][0]  %></td>
+              <td><%= array[3][0]  %></td>  
+              <td><%= array[4][0]  %></td>
+              </tr>
+              <tr>
+              <td>2 </td>
+              <td><%= array[0][1]  %></td>
+              <td><%= array[1][1]  %></td>
+              <td><%= array[2][1]  %></td>
+              <td><%= array[3][1]  %></td>  
+              <td><%= array[4][1]  %></td>
+              </tr>
+              <tr>
+              <td>3 </td>
+              <td><%= array[0][2]  %></td>
+              <td><%= array[1][2]  %></td>
+              <td><%= array[2][2]  %></td>
+              <td><%= array[3][2]  %></td>  
+              <td><%= array[4][2]  %></td>
+              </tr>
+              <tr>
+              <td>4 </td>
+              <td><%= array[0][3]  %></td>
+              <td><%= array[1][3]  %></td>
+              <td><%= array[2][3]  %></td>
+              <td><%= array[3][3]  %></td>  
+              <td><%= array[4][3]  %></td>
+              </tr>
+              <tr>
+              <td>5 </td>
+              <td><%= array[0][4]  %></td>
+              <td><%= array[1][4]  %></td>
+              <td><%= array[2][4]  %></td>
+              <td><%= array[3][4]  %></td>  
+              <td><%= array[4][4]  %></td>
+              </tr>         
+              <td>6 </td>
+              <td><%= array[0][5]  %></td>
+              <td><%= array[1][5]  %></td>
+              <td><%= array[2][5]  %></td>
+              <td><%= array[3][5]  %></td>  
+              <td><%= array[4][5]  %></td>
+              </tr>  
+              <td>7 </td>
+              <td><%= array[0][6]  %></td>
+              <td><%= array[1][6]  %></td>
+              <td><%= array[2][6]  %></td>
+              <td><%= array[3][6]  %></td>  
+              <td><%= array[4][6]  %></td>
+              </tr> 
+              
+              
+              
+              </tr>
+             
+              
+              </tbody>
+              </table>
+                
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end Modal -->
+
+        <td>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
-      <% end %>
+      
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Group', new_group_path %>
-<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="top:-124px;left:70px;position:relative;">Atrás</a>
+
+<a href="javascript:history.back()" class="btn btn-primary btn-md" >Atrás</a>
+<%= link_to 'Nuevo Grupo', new_group_path,:class=>"btn-default btn btn-md" %>

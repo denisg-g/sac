@@ -1,0 +1,70 @@
+<%= form_for(@student) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+
+  <div class="field col-md-4">
+    <%= f.label :carnet %><br>
+    <%= f.text_field :carnet,:class=>"form-control" ,:placeholder=>"2014-1234U",:autofocus=>"true"%>
+  </div>
+  <%= f.label :nombres %><br>
+  <div class="input-group">
+   
+    <%= f.text_field :nombre,:class=>"form-control col-md-3" ,:placeholder=>"Primer Nombre"%><span class="input-group-btn" style="width:0px;"></span>
+    <%= f.text_field :nombre1,:class=>"form-control col-md-3",:style=>"margin-left:-2px",:placeholder=>"Segundo Nombre" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :email %><br>
+    <%= f.text_field :email, :class=>"form-control" ,:placeholder=>"persona@ejemplo.com"%>
+  </div>
+  <%= f.label :apellidos %><br>
+  <div class="input-group">
+    
+     <%= f.text_field :apellido,:class=>"form-control col-md-3" ,:placeholder=>"Primer Apellido"%><span class="input-group-btn" style="width:0px;"></span>
+    <%= f.text_field :apellido1,:class=>"form-control col-md-3",:style=>"margin-left:-2px",:placeholder=>"Segundo Apellido" %>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :tipo_sangre %><br>
+   <%= f.select :tipo_sangre,(["A+", "A-" ,"B+","B-","AB+","AB-","O+","O-"]),{}, {:class=> "form-control",:style=>"float:left;width:30%" }%>
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :lugar_de_nacimiento %><br>
+    <%= f.select :lugar_nac,(["Boaco","Carazo","Chinandega","Chontales","Estelí","Granada","Jinotega","León","Madriz","Managua","Masaya","Matagalpa","Nueva Segovia","Rivas","Rio San Juan","RACS","RACN","Otro"]),{}, {:class=> "form-control",:style=>"float:left" }%>
+
+  </div>
+  <div class="field col-md-4">
+    <%= f.label :Fecha_de_nacimiento %><br>
+    <%= f.text_field :fecha_nac, :id=>"datepicker",:class=>"form-control",:value=>@student.fecha_nac.strftime("%d/%m/%Y")  %>
+
+  </div>
+
+  <% @student.tutors.each do |t| %>
+ 
+   <div class="field col-md-4">
+   <%= f.label :Tutores %><br>
+    <%= f.label t.first %>
+    </div>
+   <% end %> 
+   <div class="field col-md-4">
+    <%= f.label :dirección %><br>
+    <%= f.text_area :direction,:class=>"form-control" %>
+  </div>
+    <div class="field col-md-4">
+    <%= f.label :tel %><br>
+    <%= f.text_field :tel,:class=>"form-control",:placeholder=>"8888-1234" %>
+
+  </div>
+  <%= f.file_field :avatar,:class=>"col-md-3" %>
+   <script type="text/javascript">$('#datepicker').datepicker();</script><br><br><br><br><br><br><br>
+  <div class="actions">
+    <%= f.submit "Guardar",:class=>"btn btn-md btn-primary", :style=>"margin-left:5em;"%>
+  </div>
+<% end %>

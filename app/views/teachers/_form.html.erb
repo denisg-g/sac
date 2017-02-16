@@ -1,0 +1,67 @@
+<%= form_for(@teacher,:html=>{:style=>"overflow:auto;"}) do |f| %>
+  <% if @teacher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
+
+      <ul>
+      <% @teacher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.file_field :image,:class=>"col-md-12"  ,accept: 'image/png,image/jpeg'%>
+  <div class="field col-md-3">
+    <%= f.label :tipo_id %><br>
+    <%= f.text_field :tipo_id,:class=>"form-control col-md-2",:autofocus=>"true" %>
+  </div>
+  <%= f.label :nombres %>
+  <div class="input-group">
+    <%= f.text_field :name,:class=>"form-control col-md-3" ,:placeholder=>"Primer Nombre"%><span class="input-group-btn" style="width:0px;"></span>
+    <%= f.text_field :name1,:class=>"form-control col-md-3",:style=>"margin-left:-2px",:placeholder=>"Segundo Nombre" %>
+  </div>
+
+  <div class="field col-md-3" style="margin-top:1em">
+    <%= f.label :cedula %><br>
+    <%= f.text_field :cedula ,:class=>"form-control col-md-2"%>
+  </div>
+  
+  <%= f.label :apellidos ,:style=>"margin-top:1em"%><br>
+  <div class="input-group " style="float:left;">
+    <%= f.text_field :lastname,:class=>"form-control col-md-2" ,:placeholder=>"Primer Apellido"%><span class="input-group-btn" style="width:0px;"></span>
+    <%= f.text_field :lastname1,:class=>"form-control col-md-2",:style=>"margin-left:-2px",:placeholder=>"Segundo Apellido" %>
+  </div>
+  
+  <div class="field col-md-3" style="margin-top:1em">
+    <%= f.label :email %><br>
+    <%= f.text_field :email,:class=>"form-control" %>
+  </div>
+  <div class="field col-md-3"style="margin-top:1em">
+    <%= f.label :dirección %><br>
+    <%= f.text_area :direction ,:class=>"form-control col-md-2"%>
+  </div>
+  <div class="field col-md-3"style="margin-top:1em">
+    <%= f.label :fecha_nac %><br>
+    <%= f.text_field :fecha_nac, :id=>"datepicker",:class=>"form-control",:value=>"01/01/1992" ,:style=>"width:175px;" %>
+  </div>
+  
+  <div class="col-md-10 tel" id="tel">
+    <h2 style="margin-top:0;">telefonos</h2>
+    <%= link_to "agregar","javascript:;",:onclick => "addFields1()",:class=> "btn btn-default" ,:style=>"position:absolute;top:20px;right:40px;"%>
+    <%= f.fields_for :tel_teachers do |tel| %>
+      <div class="fields col-md-3">
+
+        <%= tel.select :tipo,(["Claro","Convencional","Cootel","Movistar"]),{}, {:class=> "form-control",:style=>"float:left" }%>
+        <%= tel.text_field :numero,:class=> "form-control"%>  
+        <%= tel.hidden_field :_destroy %> 
+        <%= link_to "Eliminar","javascript:;",:onclick => "remove_fieldss(this)",:class => "btn-default btn col-md-12",:style=>""  %>  
+        <br class="separador">
+      </div>
+      <% end %>
+    </div>
+    <script type="text/javascript">$('#datepicker').datepicker();</script>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <div class="actions">
+    <%= f.submit "Guardar",:class=>"btn btn-default btn-md",:style=>"margin-left:60px;" %>
+  </div>
+<% end %>

@@ -1,17 +1,15 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Tutors</h1>
 
-<table>
+<h1>Padres de Familia</h1>
+
+<%= link_to '', new_tutor_path,:class=>"btn btn-default fa fa-plus",:style=>"position:absolute;left:54em;top:1em;",:title=>"Nuevo Tutor"%>
+<%= paginate(@tutors) %>
+<table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th>Tipo</th>
-      <th>Cedula</th>
-      <th>First</th>
-      <th>Second</th>
-      <th>Apellido</th>
-      <th>Apellido1</th>
-      <th>Tipotutor</th>
+      <th>Nombres </th>
+      <th>Apellidos</th>
+      <th>Parentesco</th>
       <th>Email</th>
       <th>Direction</th>
       <th colspan="3"></th>
@@ -21,18 +19,18 @@
   <tbody>
     <% @tutors.each do |tutor| %>
       <tr>
-        <td><%= tutor.tipo_id %></td>
-        <td><%= tutor.cedula %></td>
-        <td><%= tutor.first %></td>
-        <td><%= tutor.second %></td>
-        <td><%= tutor.apellido %></td>
-        <td><%= tutor.apellido1 %></td>
+        <td><%= tutor.first %> <%= tutor.second %></td>
+        <td><%= tutor.apellido %> <%= tutor.apellido1 %></td>
         <td><%= tutor.tipotutor %></td>
         <td><%= tutor.email %></td>
         <td><%= tutor.direction %></td>
-        <td><%= link_to 'Show', tutor %></td>
-        <td><%= link_to 'Edit', edit_tutor_path(tutor) %></td>
-        <td><%= link_to 'Destroy', tutor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to tutor,:title=>"Mostrar" do%>
+          <span class="fa fa-eye btn btn-default btn-md"></span> <% end %>
+        </td>
+        <td><%= link_to edit_tutor_path(tutor),:title=>"Editar" do%>
+          <span class="fa fa-pencil-square-o btn btn-default btn-md"></span> <% end %></td>
+        <td><%= link_to tutor, method: :delete,:title=>"Eliminar", data: { confirm: '¿Estás seguro?' } do  %><span class="fa fa-trash btn-default btn btn-md"></span>
+          <% end %></td>
       </tr>
     <% end %>
   </tbody>
@@ -40,5 +38,5 @@
 
 <br>
 
-<%= link_to 'New Tutor', new_tutor_path %>
-<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="top:-124px;left:70px;position:relative;">Atrás</a>
+
+<a href="javascript:history.back()" class="btn btn-default btn-md" style="top:;position:relative;">Atrás</a>

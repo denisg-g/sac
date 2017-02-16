@@ -1,64 +1,87 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Carnet:</strong>
-  <%= @student.carnet %>
-</p>
-
-<p>
-  <strong>Nombre:</strong>
-  <%= @student.nombre %>
-</p>
-
-<p>
-  <strong>Nombre1:</strong>
-  <%= @student.nombre1 %>
-</p>
-
-<p>
-  <strong>Apellido:</strong>
-  <%= @student.apellido %>
-</p>
-
-<p>
-  <strong>Apellido1:</strong>
-  <%= @student.apellido1 %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @student.email %>
-</p>
-
-<p>
-  <strong>Direction:</strong>
-  <%= @student.direction %>
-</p>
-
-<p>
-  <strong>Estado:</strong>
-  <%= @student.estado %>
-</p>
-
-tutor 
-<% @student.tutors.each do |e| %>
-<%= e.first  %><br>
-<% end  %>
-
+<div class="wrapper">
+            
 <% flag = false  %>
 <% stu = @student.registers  %>
 <% s = stu.first %>
 <% if s.present? %>
   <% if (s.year == Time.now.year.to_s)  %>
     <% flag = true  %>
+    <% flms = "ya esta matriculado en " + @group.name + " "+ @group.seccion %>
   <% else %>
     <% flag = false  %>
   <% end %>
 <% end %>  
-<% if flag == true %>
-  Ya está matriculado
-<% else %>
-  <%= link_to "Matricular",new_register_path(:id_student=>@student.id) %>
+
+<% if @group.present?  %>
+  <% if @group.max.to_i <= @cont  %>
+    <% flag = true  %>
+    <% flms = "Este grupo alcanzó el máximo"  %>
+  <% end %>
 <% end %>
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="top:-124px;left:70px;position:relative;">Atrás</a>
+
+
+            <div class="card radius shadowDepth1">
+                <div class="card__image border-tlr-radius">
+                    <%= image_tag @student.avatar,:style =>"width:200px;margin-left:6em;"%>
+                </div>
+
+                <div class="card__content card__padding">
+                    <div class="card__share">
+                        <div class="card__social"> 
+                            <% if flag == true %>
+                                <%= link_to "", :class => 'share-icon hide',:title => "Editar" do %>
+                                  <span class="fa fa-pencil"></span>
+                                  <% end %>
+                                  <%= link_to edit_student_path(@student), :class => 'share-icon hide',:title => "Editar" do %>
+                                  <span class="fa fa-pencil"></span>
+                                  <% end %>
+                                <%= link_to edit_student_path(@student), :class => 'share-icon',:title => "Editar" do %>
+                                  <span class="fa fa-pencil"></span>
+                                  <% end %>
+                                
+                            <% else %>
+                            <%= link_to edit_student_path(@student), :class => 'share-icon',:title => "Editar" do %>
+                                  <span class="fa fa-pencil"></span>
+                                  <% end %>
+                            <%= link_to new_register_path(:id_student=>@student.id), :class => 'share-icon',:title => "Matricular" do %>
+                                  <span class="fa fa-maxcdn"></span>
+                                  <% end %>
+                            <% end %> 
+                        </div>
+
+                        <a id="share" class="share-toggle share-icon" href="#"></a>
+                    </div>
+
+                    <div class="card__meta">
+                        <strong>Carnet:</strong>
+                        <time><%= @student.carnet %></time>
+                    </div>
+
+                    <article class="card__article">
+                        <h2><%= @student.nombre %> <%= @student.nombre1 %> <%= @student.apellido %> <%= @student.apellido1 %></h2>
+                        <div class="red"> <%= @student.tipo_sangre %></div>
+                        <%= flms.to_s  %><br>
+                        <%= @student.lugar_nac %>, <%= @student.fecha_nac.strftime("%B %d, %Y") %>
+                        <p><br> <%= @student.direction %></p>
+                        <strong>tutor:</strong> 
+                        <% @student.tutors.each do |e| %>
+                        <%= e.first  %><br>
+                        <% end  %>
+                    </article>
+                </div>
+
+                <div class="card__action" data-no-turbolink>
+                    
+                    <div class="card__author">
+                        <img src="http://lorempixel.com/40/40/sports/" alt="user" style="margin:0 0;">
+                        <div class="card__author-content">
+                            e-mail: <%= link_to @student.email %>
+
+                            <a href="javascript:history.back()" class="share-icon" style="margin-left: 6em;">Atrás</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+  <% @student.estado %>

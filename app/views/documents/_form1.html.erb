@@ -1,0 +1,39 @@
+
+<%= form_for(@document) do |f| %>
+
+  
+
+<div class="row">
+  <div class="field col-md-3">
+    <%= f.label :Numero %><br>
+    <%= f.select :number,(["1","2", "3"]),{}, {:class=> "form-control",:style=>"float:;width:%", :id=>"number"}%>
+  </div>
+</div>
+<div class="row">
+  <div id="pro">
+    
+  </div>
+</div>
+<div class="row">
+  <div class="field col-md-3">
+    <%= f.label :Nombre %><br>
+    <%= f.text_field :name,:class=>"form-control",:autofocus=>"true"%>
+  </div>
+  <div class="field col-md-3">
+    <%= f.label :descipcion  %><br>
+    <%= f.text_field :description,:class=>"form-control" %>
+  </div>
+  <div class="field col-md-3">
+    <%= f.label :total %><br>
+    <%= f.text_field :register,:class=>"form-control" %>
+  </div>
+  <div class="field hidden ">
+    <%= f.label :note_id %><br>
+    <%= f.text_field :note_id,:value=>params[:note]%>
+  </div><br><br><br>
+  <div class="actions" style="margin-left: 60px;top: 10px;position: relative;">
+    <%= f.button "Guardar",name: "student",:class=>"btn btn-default btn-md", value: params[:group]%>
+  </div>
+</div>
+
+<% end %>

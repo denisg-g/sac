@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Registers</h1>
 
-<table>
+<h1>Matrículas</h1>
+<%= paginate(@register) %>
+<table class="table table-bordered table-hover table-striped">
   <thead>
     <tr>
-      <th>Student</th>
-      <th>Year</th>
+      <th>Año</th>
+      <th>Estudiante </th>
+      <th>Grupo</th>
       <th>Colegio precedencia</th>
-      <th>Pago</th>
       <th>Repitente</th>
       <th>Extracurricular</th>
       <th colspan="3"></th>
@@ -16,23 +16,25 @@
   </thead>
 
   <tbody>
-    <% @registers.each do |register| %>
+  <% if @register.present? %>
+    <% @register.each do |register| %>
       <tr>
-        <td><%= register.student_id %></td>
         <td><%= register.year %></td>
+        <td><%= register.student.nombre %> <%= register.student.nombre1 %> <%= register.student.apellido %> <%= register.student.apellido1 %></td>
+        <td><%= register.student.group.tname %></td>
         <td><%= register.colegio_precedencia %></td>
-        <td><%= register.pago %></td>
         <td><%= register.repitente %></td>
         <td><%= register.extracurricular %></td>
         <td><%= link_to 'Show', register %></td>
-        <td><%= link_to 'Edit', edit_register_path(register) %></td>
         <td><%= link_to 'Destroy', register, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+  <% else %>
+  <tr><p>No se encontraron registros que contengan el año  <%= params[:search] %>.</p></tr>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Register', new_register_path %>
-<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="top:-124px;left:70px;position:relative;">Atrás</a>
+<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="">Atrás</a>

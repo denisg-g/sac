@@ -1,59 +1,51 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel panel-heading">
+      <strong><%= @tutor.first %> <%= @tutor.second %>
+<%= @tutor.apellido %>
+<%= @tutor.apellido1 %></strong>
+    </div>
+    <div class="panel panel-body ">
+      <div class="col-md-6">  
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th> <strong>Parentezco</strong></th>
+            <th><%= @tutor.tipotutor %></th>
+          </tr>
+          <tr>
+            <th><strong>Email</strong></th>
+            <th><%= @tutor.email %></th>
+          </tr>
+          <tr>
+            <th><strong>Dirección</strong></th>
+            <th><%= @tutor.direction %></th>
+          </tr>
+        </table>
+      </div>
+      <% if @tutor.tel_tutors.any? %>
+      <% @tutor.tel_tutors.each do |tel| %>
+      <div class="col-md-6">  
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th> <strong>Cel</strong></th>
+            <th><%= tel.tipo  %></th>
+          </tr>
+          <tr>
+            <th><strong>Numero</strong></th>
+            <th> <%= tel.numero  %></th>
+          </tr>
+        </table>
+      </div>
+      <% end %>
+      <% else %>
+        No tiene Números asociados
+      <% end %>
+       
+    </div>  
+  </div>
+</div>
 
-<p>
-  <strong>Tipo:</strong>
-  <%= @tutor.tipo_id %>
-</p>
+<%  %>
 
-<p>
-  <strong>Cedula:</strong>
-  <%= @tutor.cedula %>
-</p>
 
-<p>
-  <strong>First:</strong>
-  <%= @tutor.first %>
-</p>
-
-<p>
-  <strong>Second:</strong>
-  <%= @tutor.second %>
-</p>
-
-<p>
-  <strong>Apellido:</strong>
-  <%= @tutor.apellido %>
-</p>
-
-<p>
-  <strong>Apellido1:</strong>
-  <%= @tutor.apellido1 %>
-</p>
-
-<p>
-  <strong>Tipotutor:</strong>
-  <%= @tutor.tipotutor %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @tutor.email %>
-</p>
-
-<p>
-  <strong>Direction:</strong>
-  <%= @tutor.direction %>
-</p>
-<h2>telefono del tutor</h2>
-<% if @tutor.tel_tutors.any? %>
-  <ul>
-  <% @tutor.tel_tutors.each do |tel| %>
-    <li> <%= tel.tipo  %> <%= tel.numero  %></li>
-
-    <% end %>
-  </ul>
-<% else %>
-  <p>no disponible</p>
-<% end %>
-<%= link_to 'Edit', edit_tutor_path(@tutor) %> |
-<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="top:-124px;left:70px;position:relative;">Atrás</a>
+<a href="javascript:history.back()" class="btn btn-default btn-md" style="top:-;;position:relative;">Atrás</a>

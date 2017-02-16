@@ -1,10 +1,16 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_filter :admin_o_teacher_only
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    #@groups= Group.all
+    if current_user.tipo == "Profesor" 
+      @groups = Group.where("teacher_id = ?",Teacher.find(current_user.tipo_id)).search(params[:search]).page(params[:page]).per(2).order('created_at DESC')
+    elsif current_user.tipo == "Admin"
+      @groups = Group.search(params[:search]).page(params[:page]).per(2).order('created_at DESC')
+    end
   end
 
   # GET /groups/1
@@ -14,21 +20,27 @@ class GroupsController < ApplicationController
 
   # GET /groups/new
   def new
+    if current_user.tipo=="Profesor"
+      redirect_to root_path, :alert => 'No estás autorizado'
+    end
     @group = Group.new
   end
 
   # GET /groups/1/edit
   def edit
+    if current_user.tipo=="Profesor"
+      redirect_to root_path, :alert => 'No estás autorizado'
+    end
   end
 
   # POST /groups
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-
+    @group.teacher_id = current_user.tipo_id.to_i
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.html { redirect_to @group, notice: 'Grupo Creado' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -42,7 +54,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        format.html { redirect_to @group, notice: 'Grupo Actualizado ' }
         format.json { render :show, status: :ok, location: @group }
       else
         format.html { render :edit }
@@ -56,9 +68,13 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }
+      format.html { redirect_to groups_url, notice: 'El grupo fue eliminado' }
       format.json { head :no_content }
     end
+  end
+
+  def edit_notes
+    
   end
 
   private

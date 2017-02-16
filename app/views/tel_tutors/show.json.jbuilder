@@ -1,1 +1,0 @@
-json.partial! "tel_tutors/tel_tutor", tel_tutor: @tel_tutor

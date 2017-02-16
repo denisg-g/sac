@@ -1,17 +1,8 @@
 <%= image_tag "logocolegio.png" %>
 
+<% if current_user.tipo == "Estudiante" %>
+<% stu_id = current_user.tipo_id %>
+<% elsif current_user.tipo == "Profesor" %>
 
 
-
-
-<div class="well">
-<%= link_to "Nuevo estudiante",new_student_path,:class=>"" %>
-<%= link_to "Nuevo tutor",new_tutor_path,:class=>"" %>
-<%= link_to "Nueva matricula",new_register_path,:class=>"" %>
-<%= link_to "Nuevo grupo", new_group_path,:class=>"" %>
-<br>
-<%= link_to "lista estudiante",students_path,:class=>"" %>
-<%= link_to "lista tutor",tutors_path,:class=>"" %>
-<%= link_to "lista matricula",registers_path,:class=>"" %>
-<%= link_to "Nuevo grupo", groups_path,:class=>"" %>
-</div>
+<% end %>

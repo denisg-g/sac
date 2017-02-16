@@ -1,84 +1,62 @@
-<%= form_for(@tutor) do |f| %>
-  <% if @tutor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@tutor.errors.count, "error") %> prohibited this tutor from being saved:</h2>
+<%= form_for(@tutor,:html=>{:style=>"overflow:auto;"}) do |f| %>
 
-      <ul>
-      <% @tutor.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
+  <div class="field col-md-4">
     <%= f.label :tipo_id %><br>
-    <%= f.text_field :tipo_id %>
+    <%= f.select :tipo_id,(["Cedula","Pasaporte"]),{}, {:class=> "form-control",:style=>"float:left" }%>
   </div>
-  <div class="field">
+  <%= f.label :nombres %><br>
+  <div class="input-group">
+    <%= f.text_field :first,:class=>"form-control col-md-3" ,:placeholder=>"Primer Nombre",:autofocus=>"true"%><span class="input-group-btn" style="width:0px;"></span>
+    <%= f.text_field :second,:class=>"form-control col-md-3",:style=>"margin-left:-2px",:placeholder=>"Segundo Nombre" %>
+  </div>
+  <div class="field col-md-4">
     <%= f.label :cedula %><br>
-    <%= f.text_field :cedula %>
+    <%= f.text_field :cedula ,:class=>"form-control col-md-3" ,:placeholder=>"001-190394-0034T"%>
   </div>
-  <div class="field">
-    <%= f.label :first %><br>
-    <%= f.text_field :first %>
+
+  <%= f.label :Apellidos %><br>
+  <div class="input-group">
+    <%= f.text_field :apellido,:class=>"form-control col-md-3" ,:placeholder=>"Primer Apellido"%><span class="input-group-btn" style="width:0px;"></span>
+    <%= f.text_field :apellido1,:class=>"form-control col-md-3",:style=>"margin-left:-2px",:placeholder=>"Segundo Apellido" %>
   </div>
-  <div class="field">
-    <%= f.label :second %><br>
-    <%= f.text_field :second %>
+  <div class="field col-md-4">
+    <%= f.label :Parentesco %><br>
+    <%= f.select :tipotutor,(["Abuelo","Hermano(a)","Madre","Padre","Tio(a)"]),{}, {:class=> "form-control",:style=>"float:left" }%>
   </div>
-  <div class="field">
-    <%= f.label :apellido %><br>
-    <%= f.text_field :apellido %>
-  </div>
-  <div class="field">
-    <%= f.label :apellido1 %><br>
-    <%= f.text_field :apellido1 %>
-  </div>
-  <div class="field">
-    <%= f.label :tipotutor %><br>
-    <%= f.text_field :tipotutor %>
-  </div>
-  <div class="field">
+  <div class="field col-md-3" style="padding-left: 0;">
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email,:class=>"form-control col-md-3",:style=>"margin-left:-2px",:placeholder=>"persona@ejemplo.com" %>
   </div>
-  <div class="field">
-    <%= f.label :direction %><br>
-    <%= f.text_field :direction %>
+  <div class="field" style="width:207px;float:left;">
+    <%= f.label :dirección %><br>
+    <%= f.text_area :direction,:class=>"form-control ",:style=>"margin-left:-2px;",:placeholder=>"Segundo Nombre" %>
   </div>
-  <h2>telefonos</h2>
-  <!--
-  <%= f.fields_for :tel_tutors do |tel| %>
-    <div class="fields">
-      tipo
-      <%= tel.text_field :tipo %>
-      numero
-      <%= tel.number_field :numero %>  
-      <%= tel.hidden_field :_destroy %> 
-      <%= link_to "Eliminar","#",:onclick => "remove_fields(this)", data: { turbolinks: false }, :class => "agrega"  %>  
-      <br class="separador">
-    </div>
-    <% end %>-->
+  <div class="field hidden " >
+    <%= f.text_area :student,:class=>"form-control col-md-3 ",:style=>"margin-left:-2px;",:value=>params[:id_student] %>
+    
+  </div>
+  <div class="col-md-10 tel" id="tel">
+    <h2 style="margin-top:0;">telefonos</h2>
+    <%= link_to "agregar","javascript:;",:onclick => "addFields()",:class=> "btn btn-default" ,:style=>"position:absolute;top:20px;right:40px;"%>
+    <%= f.fields_for :tel_tutors do |tel| %>
+      <div class="fields col-md-3">
 
-  <%= f.fields_for :tel_tutors do |tel| %>
-    <div class="fields">
-      tipo
-      <%= tel.text_field :tipo %>
-      numero
-      <%= tel.number_field :numero %>  
-      <%= tel.hidden_field :_destroy %> 
-      <%= link_to "Eliminar","javascript:;",:onclick => "remove_fieldss(this)", data: { turbolinks: false }, :class => "agrega"  %>  
-      <br class="separador">
+        <%= tel.select :tipo,(["Claro","Convencional","Cootel","Movistar"]),{}, {:class=> "form-control",:style=>"float:left" }%>
+        <%= tel.text_field :numero,:class=> "form-control"%>
+        <%= tel.hidden_field :_destroy %>
+        <%= link_to "Eliminar","javascript:;",:onclick => "remove_fieldss(this)",:class => "btn-default btn col-md-12",:style=>""  %>
+        <br class="separador">
+      </div>
+      <% end %>
     </div>
-    <% end %>
-
-    <div id="addressHeader" style="display:none"> 
+    <div id="addressHeader" style="display:none">
     </div>
     <ul id="myList">
   </ul>
-    <%= link_to "agregar","javascript:;",:onclick => "addFields()", data: { turbolinks: false }%>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="actions col-md-12">
+    <%= f.submit "Siguiente",:class=>"btn btn-default btn-md" ,:style=>"left:45px;" %>
   </div>
-<% end %> 
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<% end %>

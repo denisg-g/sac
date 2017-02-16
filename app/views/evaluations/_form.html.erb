@@ -1,0 +1,27 @@
+<%= form_for(@evaluation) do |f| %>
+
+
+  <div class="field col-md-3">
+    <%= f.label :Nombre %><br>
+    <%= f.text_field :name,:class=>"form-control",:autofocus=>"true"%>
+  </div>
+  <div class="field col-md-3">
+    <%= f.label :value %><br>
+    <%= f.text_field :value,:class=>"form-control" %>
+  </div>
+  <div class="field col-md-3">
+    <%= f.label :total %><br>
+    <%= f.text_field :total,:class=>"form-control" %>
+  </div>
+  <div class="field col-md-3">
+    <%= f.label :Parcial %><br>
+     <%= f.select :from,(['Primero', 'Segundo','Tercero','Cuarto' ]),{}, {:class=> "form-control",:style=>"float:left" }%>
+  </div>
+  <div class="field hidden ">
+    <%= f.label :note_id %><br>
+    <%= f.text_field :note_id,:value=>params[:note]%>
+  </div><br><br><br>
+  <div class="actions" style="margin-left: 60px;top: 10px;position: relative;">
+    <%= f.button "Guardar",name: "student",:class=>"btn btn-default btn-md", value: params[:group]%>
+  </div>
+<% end %>

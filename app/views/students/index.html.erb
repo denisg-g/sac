@@ -1,15 +1,15 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Students</h1>
-
-<table>
+<row class="row">
+<h1>Estudiantes Registrados</h1>
+</row>
+<%= paginate(@students) %>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>Carnet</th>
-      <th>Nombre</th>
-      <th>Nombre1</th>
-      <th>Apellido</th>
-      <th>Apellido1</th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
       <th>Email</th>
       <th>Direction</th>
       <th>Estado</th>
@@ -21,22 +21,25 @@
     <% @students.each do |student| %>
       <tr>
         <td><%= student.carnet %></td>
-        <td><%= student.nombre %></td>
-        <td><%= student.nombre1 %></td>
-        <td><%= student.apellido %></td>
-        <td><%= student.apellido1 %></td>
+        <td><%= student.nombre %> <%= student.nombre1 %></td>
+        <td><%= student.apellido %> <%= student.apellido1 %></td>
         <td><%= student.email %></td>
         <td><%= student.direction %></td>
         <td><%= student.estado %></td>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to student,:title=>"Mostrar" do%>
+          <span class="fa fa-eye btn btn-default btn-md"></span> <% end %>
+        </td>
+        <td><%= link_to edit_student_path(student),:title=>"Editar" do%>
+          <span class="fa fa-pencil-square-o btn btn-default btn-md"></span> <% end %></td>
+        <td><%= link_to student, method: :delete,:title=>"Eliminar", data: { confirm: '¿Estás seguro?' } do  %><span class="fa fa-trash btn-default btn btn-md"></span>
+          <% end %></td>
       </tr>
     <% end %>
   </tbody>
-</table>
+  </table>
+</div>
 
 <br>
 
 <%= link_to 'New Student', new_student_path %>
-<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="top:-124px;left:70px;position:relative;">Atrás</a>
+<a href="javascript:history.back()" class="btn btn-primary btn-lg" >Atrás</a>

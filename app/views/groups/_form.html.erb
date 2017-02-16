@@ -1,37 +1,27 @@
 <%= form_for(@group) do |f| %>
-  <% if @group.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+ 
 
-      <ul>
-      <% @group.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="field col-md-3">
+    <%= f.label :Nombre %><br>
+    <%= f.text_field :name,:class=>"form-control ",:autofocus=>"true" %>
   </div>
-  <div class="field">
-    <%= f.label :seccion %><br>
-    <%= f.text_field :seccion %>
+  <div class="field col-md-3">
+    <%= f.label :sección %><br>
+    <%= f.text_field :seccion ,:class=>"form-control "%>
   </div>
-  <div class="field">
-    <%= f.label :max %><br>
-    <%= f.text_field :max %>
+  <div class="field col-md-3">
+    <%= f.label :máximo_de_alumnos %><br>
+    <%= f.number_field :max,:class=>"form-control " %>
   </div>
-  <div class="field">
+  <div class="field col-md-3">
     <%= f.label :turno %><br>
-    <%= f.text_field :turno %>
+    <%= f.text_field :turno,:class=>"form-control " %>
   </div>
-  <div class="field"> 
+  <div class="field col-md-12"> <br>
     <%= f.label :observación %><br>
-    <%= f.text_field :tipo %>
+    <%= f.text_area :tipo,:class=>"form-control " %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Guardar" ,class: "btn btn-default btn-md",:style=>"margin:10px 5em"%>
   </div>
 <% end %>

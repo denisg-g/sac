@@ -1,50 +1,104 @@
-<%= form_for(@register) do |f| %>
-  <% if @register.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@register.errors.count, "error") %> prohibited this register from being saved:</h2>
+<%= form_for @register ,:url => {:action => "nuevoIng"} do |f| %>
+<% register = Register.maximum(:id).next %>
+<% student = Student.maximum(:id).next %>
+   <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#nuevo" aria-controls="nuevo" role="tab" data-toggle="tab" style="color:#000;">Nuevo Ingreso</a></li>
+    <li role="presentation"><a href="#reing" aria-controls="reing" role="tab" data-toggle="tab" style="color:#000;">Re-ingreso</a></li>
+  </ul>
 
-      <ul>
-      <% @register.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+   <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="nuevo">
+      <div class="hide">
+        <%= f.text_field :student_id, :value => student %>
+        <%= f.text_field :year, :value => Time.now.year %>
+      </div>
+      <div class="row">
+        <div class="field col-md-3">
+          <%= f.label :colegio_precedencia %><br>
+          <%= f.text_field :colegio_precedencia,:autofocus=>"true",:class=>"form-control" %>
+        </div>
+        <div class="field col-md-1">
+          <%= f.label :pago %><br>
+          <%= f.check_box :pago,:class=>"form-control" %>
+        </div>
+        <div class="field col-md-2">
+          <%= f.label :repitente %><br>
+          <%= f.select :repitente,([  "Si", "No" ]),{}, {:class=> "form-control",:style=>"float:left" }%>
+        </div>
+        <div class="field col-md-3">
+          <%= f.label :extracurricular %><br>
+          <%= f.select :extracurricular,(["Ajedrez","Basquetball","Futball","Ping Pong  ","VolleyBall"]),{},{:class=>"form-control"}%>
+        </div>
+      </div>
+    </div><!--  END NUEVO-->
+
+    <div role="tabpanel" class="tab-pane" id="reing">
+      <div class="row">
+        <div class="field col-md-6">
+         <div class="input-group custom-search-form" id="stuCont" style="margin-top:-40px;left:289px;">
+           <%= text_field_tag "student", "" ,:class=>"form-control", :onClick=>"pulsar();",:placeholder=>"Buscar Estudiante" %>
+           <span style="display:block;" class="input-group-btn fa fa-search">
+           <%= submit_tag "", {:type => "button", :id => "buscarstudent",:class=>"btn btn-default btn-md"}%> </span>
+         </div>
+       </div>
+       <div id="studinfo" style="right:2000px;">
+       </div>
+     </div>
+     <div id="target">
+     </div>
+
+   </div><!-- END REING -->
+
+    <% a = 1 %>
+    <%= f.fields_for :documents do |doc|  %>
+      <% if  a==1%>
+        <div class="row" style="padding-top:10px;padding-left:50px;">
+          <div class="col-md-3 field">
+            <%= doc.label :Nombre %><br>
+          </div>
+          <div class="col-md-1 field">
+            <%= doc.label :Estado %><br>
+          </div>
+          <div class="col-md-3 field">
+            <%= doc.label :descipcion  %><br>
+          </div>
+          <div class="col-md-3 field" id="selstus" style="z-index:-1000;">
+            <%= f.label :grupo %><br>
+            <select class="form-control"  name="student[group_id]" id="student_group_id">
+              <% @grupo.each do |g| %>
+                <option value="<%= g.id %>"><%= g.tname %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <script type="text/javascript">
+        $(".nav-tabs > li > a").click(function() {
+          if($(this).html() == "Nuevo Ingreso"){
+            document.getElementById("selstus").style["z-index"]="-1000";
+          }
+          if($(this).html() == "Re-ingreso"){
+            document.getElementById("selstus").style["z-index"]="2";
+          }
+        });
+        </script>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :student_id %><br>
-    <%= f.text_field :student_id, :value => params[:id_student]%>
-  </div>
-  <div class="field">
-    <%= f.label :year %><br>
-    <%= f.text_field :year,:value => Time.now.year %>
-  </div>
-  <div class="field">
-    <%= f.label :colegio_precedencia %><br>
-    <%= f.text_field :colegio_precedencia %>
-  </div>
-  <div class="field">
-    <%= f.label :pago %><br>
-    <%= f.check_box :pago %>
-  </div>
-  <div class="field">
-    <%= f.label :repitente %><br>
-    <%= f.text_field :repitente %>
-  </div>
-  <div class="field">
-    <%= f.label :extracurricular %><br>
-    <%= f.text_field :extracurricular %>
-  </div>
-  <%= fields_for :students  do |stu| %>
-    <div class="fields">
-      grupo
-  <%= select_tag "grupo", options_from_collection_for_select(@groups, "id", "name") %>
-      <br class="separador">
-
-    </div>
+      <% docu = @documentos.find(a).name %>
+        <div class="col-md-7" style="position:relative;bottom:40px;">
+          <div class="field col-md-6">
+            <%= doc.text_field :name ,:class=>"form-control",:autofocus=>"true" ,:disabled=>"true",:value=>docu%>
+          </div>
+          <div class="field col-md-2">
+            <%= doc.check_box :status,:class=>"form-control" %>
+          </div>
+          <div class="field col-md-4">
+            <%= doc.text_field :description,:class=>"form-control" %>
+          </div>
+          <div class="field col-md-3 hidden ">
+            <% a = a + 1 %>
+          </div>
+        </div>
     <% end %>
-  <div class="actions">
-    <%= f.button :submit,name: "student_id",value: params[:id_student] %>
-
-  </div>
+  </div> <!-- Tab panes --><br><br><br><br><br><br><br><br><br><br><br>
 <% end %>

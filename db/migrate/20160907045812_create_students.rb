@@ -10,7 +10,8 @@ class CreateStudents < ActiveRecord::Migration
       t.string :direction
       t.integer :group_id
       t.integer :estado
-
+      t.integer :note
+      
       t.timestamps null: false
     end
   end

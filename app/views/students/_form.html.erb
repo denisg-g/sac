@@ -1,52 +1,63 @@
 <%= form_for(@student) do |f| %>
-  <% if @student.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
 
-      <ul>
-      <% @student.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :carnet %><br>
-    <%= f.text_field :carnet %>
+  <div class="field col-md-4">
+    <%= f.label :carnet %>
+    <%= f.text_field :carnet,:class=>"form-control",:id=>"carnet",:readonly=>"true",:value=>@carnet%>
   </div>
-  <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
+  <%= f.label :nombres %><br>
+  <div class="input-group">
+    <%= f.text_field :nombre,:class=>"form-control col-md-3",:id=>"nombre" ,:placeholder=>"Primer Nombre",:autofocus=>"true"%><span class="input-group-btn" style="width:0px;"></span>
+    <%= f.text_field :nombre1,:class=>"form-control col-md-3",:id=>"nombre1",:style=>"margin-left:-2px",:placeholder=>"Segundo Nombre" %>
   </div>
-  <div class="field">
-    <%= f.label :nombre1 %><br>
-    <%= f.text_field :nombre1 %>
-  </div>
-  <div class="field">
-    <%= f.label :apellido %><br>
-    <%= f.text_field :apellido %>
-  </div>
-  <div class="field">
-    <%= f.label :apellido1 %><br>
-    <%= f.text_field :apellido1 %>
-  </div>
-  <div class="field">
+  <div class="field col-md-4">
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :class=>"form-control",:id=>"email" ,:placeholder=>"persona@ejemplo.com"%>
   </div>
-  <div class="field">
-    <%= f.label :direction %><br>
-    <%= f.text_field :direction %>
+  <%= f.label :apellidos %><br>
+  <div class="input-group">
+
+     <%= f.text_field :apellido,:class=>"form-control col-md-3" ,:id=>"apellido" ,:placeholder=>"Primer Apellido"%><span class="input-group-btn" style="width:0px;"></span>
+    <%= f.text_field :apellido1,:class=>"form-control col-md-3",:id=>"apellido1" ,:style=>"margin-left:-2px",:placeholder=>"Segundo Apellido" %>
   </div>
-  <div class="field">
-    <%= f.label :estado %><br>
-    <%= f.number_field :estado %>
+  <div class="field col-md-2" style="padding-right: 0;">
+    <%= f.label :tipo_sangre %><br>
+    <%= f.select :tipo_sangre,(["A+", "A-" ,"B+","B-","AB+","AB-","O+","O-"]),{}, {:class=> "form-control",:style=>"float:left;width:80%" }%>
   </div>
-  tutors
-  <%= f.collection_select :tutor_ids, @tutors, :id,:first,{},{:multiple=>true} %>
+  <div class="field col-md-2"style="padding-left: 10px;">
+    <%= f.label :tel %><br>
+    <%= f.text_field :tel,:class=>"form-control",:placeholder=>"8888-1234",:style=>"width:100px" ,:onkeypress=>"return justNumbers(event);"%>
+
+  </div>
+  <div class="field col-md-3 " style="">
+    <%= f.label :lugar_de_nacimiento %><br>
+    <%= f.select :lugar_nac,(["Boaco","Carazo","Chinandega","Chontales","Estelí","Granada","Jinotega","León","Madriz","Managua","Masaya","Matagalpa","Nueva Segovia","Rivas","Rio San Juan","RACS","RACN","Otro"]),{}, {:class=> "form-control",:style=>"" }%>
+
+  </div>
+  <div class="field col-md-3">
+    <%= f.label :Fecha_de_nacimiento %><br>
+    <%= f.text_field :fecha_nac, :id=>"datepicker",:class=>"form-control",:value=>"01/01/1992" ,:style=>"width:175px;" %>
+
+    </div>
+    <br><br><br>
+
+
+
+
+
+  <%#f.collection_select :tutor_ids,@tutors, :id,:first ,{},{:remote=>true,:multiple=>true, :class=>"form-control"} %>
+
+   <div class="field col-md-4" style="padding-left: 0px;">
+    <%= f.label :dirección %><br>
+    <%= f.text_area :direction,:class=>"form-control" %>
+  </div>
+  <div class="field col-md-3 " style="">
+    <%= f.label :grupo %><br>
+    <%= f.collection_select :group_id,@grupo,:id,:tname,{}, {:class=> "form-control",:style=>"" }%>
+
+  </div>
+  <div style="top:20px;">
+  <%= f.file_field :avatar ,:class=>"col-md-3 field",:style=>"top:30px" %>
+</div>
+   <script type="text/javascript">$('#datepicker').datepicker();</script><br><br><br><br><br><br>
   
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

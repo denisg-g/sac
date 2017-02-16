@@ -1,0 +1,20 @@
+<figure class="snip0057 blue">
+  <figcaption>
+    <h2><%= @teacher.name %> <%= @teacher.name1 %> <span><%= @teacher.lastname %> <%= @teacher.lastname1 %></span></h2>
+    <p>
+    <%= @teacher.cedula %><br>
+    <%= @teacher.direction %><br>
+    <%= @teacher.fecha_nac.strftime("%x") %><br>
+    <% @teacher.tel_teachers.each do |tel| %>
+      <%= tel.tipo %>
+      <%= tel.numero %><br>
+    <% end %>
+    </p>
+    <div class="icons">
+    <a href="javascript:history.back()" class="btn btn-default btn-md" ><span class="fa fa-arrow-left"></span></a>
+    <%= link_to edit_teacher_path do %><span class="fa fa-edit btn btn-md"></span><%end%></div>
+  </figcaption>
+  <div class="image"><%= image_tag(@teacher.image) %></div>
+  <div class="position"><%= @teacher.email %></div>
+</figure>
+

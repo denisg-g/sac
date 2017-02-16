@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parcial1: 
+  parcial2: 
+  semestre1: 
+  parcial3: 
+  parcial4: 
+  semestre2: 
+  nota_final: 
+  subject_id: 
+
+two:
+  parcial1: 
+  parcial2: 
+  semestre1: 
+  parcial3: 
+  parcial4: 
+  semestre2: 
+  nota_final: 
+  subject_id: 

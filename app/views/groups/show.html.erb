@@ -1,29 +1,100 @@
-<p id="notice"><%= notice %></p>
+<br><br><br>
+<div class="col-md-12" style="margin-top: 20px;">
+  <div class="panel panel-default">
+    <div class="panel panel-heading">
+      <%= @group.name %> <%= @group.seccion %>
+    </div>
+    <div class="panel panel-body">
+      <table class="table table-striped">
+        <tr>
+          <th> <strong>Máx</strong></th>
+          <th><%= @group.max %></th>
+          <th><strong>Alumnos registrados</strong></th>
+          <th><%= @group.students.count %></th>
+        </tr>
+        <tr>
+          <th><strong>Turno</strong></th>
+          <th><%= @group.turno %></th>
+          <th><strong>Tipo</strong></th>
+          <th><%= @group.tipo %></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
+<% if @group.students.present? %>
+  Estudiantes 
+<table class="table table-hover table-bordered table-stiped">
+  <thead>
+    <tr>
+  
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Email</th>
+      <% cont = 0 %> 
+      <% @group.subjects.each do |subject| %>
+      <th><%= subject.name %><% cont=cont+1 %>  </th>
+      <% end %>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Seccion:</strong>
-  <%= @group.seccion %>
-</p>
+  <tbody>
+  
+     <% @group.students.each do |student| %> 
+        <tr>
+          <td><%= student.nombre %> <%= student.nombre1 %>  </td>
+          <td><%= student.apellido %> <%= student.apellido1 %></td>
+          <td><%= student.email%></td>
+            <% notas = student.notes.sort_by(&:created_at) %>
+            <% notas.each do |note|  %>
 
-<p>
-  <strong>Max:</strong>
-  <%= @group.max %>
-</p>
+            <% if (Time.now.month.to_i < 3) %>
+               <td><%= note.parcial1 %>
+            <% end %> 
+            <% if (Time.now.month.to_i < 5 && Time.now.month.to_i > 2) %>now
+               <td><%= note.parcial2 %>
+            <% end %> 
+            <% if (Time.now.month.to_i < 7 && Time.now.month.to_i > 4) %>
+               <td><%= note.semestre1 %>
+            <% end %> 
+            <% if (Time.now.month.to_i < 9 && Time.now.month.to_i > 6) %>
+               <td><%= note.parcial3 %>
+            <% end %> 
+            <% if (Time.now.month.to_i < 11 && Time.now.month.to_i > 8) %>
+               <td><%= note.parcial4 %>
+            <% end %> 
+            <% if (Time.now.month.to_i < 12 && Time.now.month.to_i > 10) %>
+                <td><%= note.semestre2 %>
+            <% end %> 
+            <% if (Time.now.month.to_i == 12) %>
+                <td><%= note.nota_final %>
+            <% end %> 
+            
+            <%= link_to new_evaluation_path(:note=>note.id,:student=>student,:group=>@group), {:title=>"Agregar nueva evaluación"},{} do %><i class="btn btn-primary btn-sm fa fa-plus"></i><%end%></td>
 
-<p>
-  <strong>Turno:</strong>
-  <%= @group.turno %>
-</p>
 
-<p>
-  <strong>Tipo:</strong>
-  <%= @group.tipo %>
-</p>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<a href="javascript:history.back()" class="btn btn-primary btn-lg" style="top:-124px;left:70px;position:relative;">Atrás</a>
+
+          <% end %>
+          
+        <% end %>
+          
+        </tr>
+      
+    
+  
+  </tbody>
+</table>
+<% else %>
+<br><br><br><br><br><br><br><br><br><br>
+  <h1 style="bottom: 270px;position: relative">No hay estudiantes registrados</h1>  
+
+<% end %>
+<row class="col-md-4 col-md-offset-3">
+
+<%= link_to 'Edit', edit_group_path(@group),:onclick=>'location.reload();',:class=>"btn btn-primary btn-md" %> |
+<a href="javascript:history.back()" class="btn btn-primary btn-md",onclick='location.reload()'>Atrás</a>
+
+
