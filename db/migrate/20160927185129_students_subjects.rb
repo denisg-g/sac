@@ -4,7 +4,7 @@ class StudentsSubjects < ActiveRecord::Migration
       t.integer :student_id
       t.integer :subject_id
     end
- 
+
     add_index :students_subjects, :student_id
     add_index :students_subjects, :subject_id
   end

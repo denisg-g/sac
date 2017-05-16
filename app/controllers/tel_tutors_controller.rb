@@ -1,5 +1,5 @@
 class TelTutorsController < ApplicationController
-  before_action :set_tel_tutor, only: [:show, :edit, :update, :destroy]
+  before_action :set_tel_tutor, only: %i[show edit update destroy]
   before_filter :authenticate_user!
   # GET /tel_tutors
   # GET /tel_tutors.json
@@ -9,8 +9,7 @@ class TelTutorsController < ApplicationController
 
   # GET /tel_tutors/1
   # GET /tel_tutors/1.json
-  def show
-  end
+  def show; end
 
   # GET /tel_tutors/new
   def new
@@ -18,8 +17,7 @@ class TelTutorsController < ApplicationController
   end
 
   # GET /tel_tutors/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tel_tutors
   # POST /tel_tutors.json
@@ -62,13 +60,14 @@ class TelTutorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tel_tutor
-      @tel_tutor = TelTutor.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def tel_tutor_params
-      params.require(:tel_tutor).permit(:tipo, :numero, :tutor_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tel_tutor
+    @tel_tutor = TelTutor.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def tel_tutor_params
+    params.require(:tel_tutor).permit(:tipo, :numero, :tutor_id)
+  end
 end

@@ -11,7 +11,7 @@ function justNumbers(e)
         }
 
 function validastudent() {
-  if ($('#carnet').val().length < 8) {
+  if ($('#carnet').val().length < 2) {
       // Si no se cumple la condicion...
       $("#carnet").focus().after("<span class='error'>Ingrese el carnet </span>");
       $(".error").delay(3200).fadeOut(300);

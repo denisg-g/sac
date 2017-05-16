@@ -23,7 +23,7 @@ function NuevoRegistro(){
 			success: function(res){
 				 $("#target").html("<h3>Éxito</h3>");
 				 location.href="http://localhost:3000/students/new";
-				 flash="Creado Con Exito";
+				 flash="Matrícula creada con éxito";
 			}
 		})
 	}

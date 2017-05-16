@@ -1,7 +1,7 @@
 class SubjectsController < ApplicationController
-  before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :set_subject, only: %i[show edit update destroy]
   before_filter :authenticate_user!
-  before_filter :teacher_only,only: [:index]
+  before_filter :teacher_only, only: [:index]
   before_filter :admin_only
   # GET /subjects
   # GET /subjects.json
@@ -11,27 +11,25 @@ class SubjectsController < ApplicationController
 
   # GET /subjects/1
   # GET /subjects/1.json
-  def show
-  end
+  def show; end
 
   # GET /subjects/new
   def new
     @subject = Subject.new
     5.times do
-    dia = @subject.schedule_days.build
-    4.times { dia.schedule_blocks.build }
-  end
+      dia = @subject.schedule_days.build
+      4.times { dia.schedule_blocks.build }
+    end
   end
 
   # GET /subjects/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /subjects
   # POST /subjects.json
   def create
     @subject = Subject.new(subject_params)
-    
+
     respond_to do |format|
       if @subject.save
         format.html { redirect_to @subject, notice: 'Nueva materia creada' }
@@ -68,13 +66,14 @@ class SubjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subject
-      @subject = Subject.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def subject_params
-      params.require(:subject).permit(:name, :group_id,  schedule_days_attributes: [:id,:name,:_destroy,schedule_blocks_attributes: [:id,:name,:_destroy]])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_subject
+    @subject = Subject.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def subject_params
+    params.require(:subject).permit(:name, :group_id, schedule_days_attributes: [:id, :name, :_destroy, schedule_blocks_attributes: %i[id name _destroy]])
+  end
 end

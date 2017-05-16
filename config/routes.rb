@@ -5,27 +5,27 @@ Rails.application.routes.draw do
   resources :notes
   resources :subjects
   get 'welcome/index'
-  post "note/edit"
+  post 'note/edit'
   devise_for :users
 
   post 'signup' => 'devise/registrations#create', :as => :custom_user_registration
   resources :groups
   resources :registers
   resources :students
-  post 'registers/nuevoIng' => 'registers#nuevoIng' 
+  post 'registers/nuevoIng' => 'registers#nuevoIng'
   post 'registers/niewe' => 'registers#niewe'
   post 'students/actu/:id' => 'students#actu'
   resources :tel_tutors
   resources :tutors
-  get "tutors/buscar_por_tutor"
-  match 'tutors/buscar_por_tutor/:tutor'=>'tutors#buscar_por_tutor', :via => [:get]
-  get "students/buscar_por_student"
-  match 'students/buscar_por_student/:student'=>'students#buscar_por_student', :via => [:get]
+  get 'tutors/buscar_por_tutor'
+  match 'tutors/buscar_por_tutor/:tutor' => 'tutors#buscar_por_tutor', :via => [:get]
+  get 'students/buscar_por_student'
+  match 'students/buscar_por_student/:student' => 'students#buscar_por_student', :via => [:get]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root "welcome#index"
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

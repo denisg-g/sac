@@ -5,18 +5,18 @@ class TeachersControllerTest < ActionController::TestCase
     @teacher = teachers(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:teachers)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create teacher" do
+  test 'should create teacher' do
     assert_difference('Teacher.count') do
       post :create, teacher: { cedula: @teacher.cedula, cel: @teacher.cel, direction: @teacher.direction, email: @teacher.email, fecha_nac: @teacher.fecha_nac, lastname1: @teacher.lastname1, lastname: @teacher.lastname, name1: @teacher.name1, name: @teacher.name, tel: @teacher.tel, tipo_id: @teacher.tipo_id }
     end
@@ -24,22 +24,22 @@ class TeachersControllerTest < ActionController::TestCase
     assert_redirected_to teacher_path(assigns(:teacher))
   end
 
-  test "should show teacher" do
+  test 'should show teacher' do
     get :show, id: @teacher
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @teacher
     assert_response :success
   end
 
-  test "should update teacher" do
+  test 'should update teacher' do
     patch :update, id: @teacher, teacher: { cedula: @teacher.cedula, cel: @teacher.cel, direction: @teacher.direction, email: @teacher.email, fecha_nac: @teacher.fecha_nac, lastname1: @teacher.lastname1, lastname: @teacher.lastname, name1: @teacher.name1, name: @teacher.name, tel: @teacher.tel, tipo_id: @teacher.tipo_id }
     assert_redirected_to teacher_path(assigns(:teacher))
   end
 
-  test "should destroy teacher" do
+  test 'should destroy teacher' do
     assert_difference('Teacher.count', -1) do
       delete :destroy, id: @teacher
     end

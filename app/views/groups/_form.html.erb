@@ -3,11 +3,11 @@
 
   <div class="field col-md-3">
     <%= f.label :Nombre %><br>
-    <%= f.text_field :name,:class=>"form-control ",:autofocus=>"true" %>
+    <%= f.select :name,(["Primero","Segundo","Tercero","Cuarto","Quinto","Sexto","Séptimo","Octavo","Noveno","Décimo","Undécimo"]),{}, {:class=> "form-control",:style=>"float:left" }%>
   </div>
   <div class="field col-md-3">
     <%= f.label :sección %><br>
-    <%= f.text_field :seccion ,:class=>"form-control "%>
+    <%= f.select :seccion,(["A","B"]),{}, {:class=> "form-control",:style=>"float:left" }%>
   </div>
   <div class="field col-md-3">
     <%= f.label :máximo_de_alumnos %><br>
@@ -15,7 +15,7 @@
   </div>
   <div class="field col-md-3">
     <%= f.label :turno %><br>
-    <%= f.text_field :turno,:class=>"form-control " %>
+    <%= f.select :turno,(["Matutino","Vespertino"]),{}, {:class=> "form-control",:style=>"float:left" }%>
   </div>
   <div class="field col-md-12"> <br>
     <%= f.label :observación %><br>

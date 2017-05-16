@@ -5,18 +5,18 @@ class TutorsControllerTest < ActionController::TestCase
     @tutor = tutors(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:tutors)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create tutor" do
+  test 'should create tutor' do
     assert_difference('Tutor.count') do
       post :create, tutor: { apellido1: @tutor.apellido1, apellido: @tutor.apellido, cedula: @tutor.cedula, direction: @tutor.direction, email: @tutor.email, first: @tutor.first, second: @tutor.second, tipo_id: @tutor.tipo_id, tipotutor: @tutor.tipotutor }
     end
@@ -24,22 +24,22 @@ class TutorsControllerTest < ActionController::TestCase
     assert_redirected_to tutor_path(assigns(:tutor))
   end
 
-  test "should show tutor" do
+  test 'should show tutor' do
     get :show, id: @tutor
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @tutor
     assert_response :success
   end
 
-  test "should update tutor" do
+  test 'should update tutor' do
     patch :update, id: @tutor, tutor: { apellido1: @tutor.apellido1, apellido: @tutor.apellido, cedula: @tutor.cedula, direction: @tutor.direction, email: @tutor.email, first: @tutor.first, second: @tutor.second, tipo_id: @tutor.tipo_id, tipotutor: @tutor.tipotutor }
     assert_redirected_to tutor_path(assigns(:tutor))
   end
 
-  test "should destroy tutor" do
+  test 'should destroy tutor' do
     assert_difference('Tutor.count', -1) do
       delete :destroy, id: @tutor
     end

@@ -1,5 +1,5 @@
 <%= form_for @register ,:url => {:action => "nuevoIng"} do |f| %>
-<% register = Register.maximum(:id).next %>
+
 <% student = Student.maximum(:id).next %>
    <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -29,7 +29,7 @@
         </div>
         <div class="field col-md-3">
           <%= f.label :extracurricular %><br>
-          <%= f.select :extracurricular,(["Ajedrez","Basquetball","Futball","Ping Pong  ","VolleyBall"]),{},{:class=>"form-control"}%>
+          <%= f.select :extracurricular,(["Ajedrez","Basquetball","Futbol","Ping Pong  ","VolleyBall"]),{},{:class=>"form-control"}%>
         </div>
       </div>
     </div><!--  END NUEVO-->

@@ -1,8 +1,7 @@
 class TeachersController < ApplicationController
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
-    
-  before_filter :admin_only
+  before_action :set_teacher, only: %i[show edit update destroy]
 
+  before_filter :admin_only
 
   # GET /teachers
   # GET /teachers.json
@@ -12,18 +11,16 @@ class TeachersController < ApplicationController
 
   # GET /teachers/1
   # GET /teachers/1.json
-  def show
-  end
+  def show; end
 
   # GET /teachers/new
   def new
     @teacher = Teacher.new
-    2.times {@teacher.tel_teachers.build}
+    2.times { @teacher.tel_teachers.build }
   end
 
   # GET /teachers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /teachers
   # POST /teachers.json
@@ -32,7 +29,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        @user = User.new({:email => teacher_params[:email],:tipo=>"Profesor",:tipo_id=>@teacher.id,:password=>teacher_params[:cedula],:password_confirmation=>teacher_params[:cedula]})
+        @user = User.new(email: teacher_params[:email], tipo: 'Profesor', tipo_id: @teacher.id, password: teacher_params[:cedula], password_confirmation: teacher_params[:cedula])
         if @user.save
           format.html { redirect_to @teacher, notice: 'El docente se creó' }
           format.json { render :show, status: :created, location: @teacher }
@@ -64,6 +61,8 @@ class TeachersController < ApplicationController
   # DELETE /teachers/1
   # DELETE /teachers/1.json
   def destroy
+    @us = User.find_by(tipo_id: @teacher.id)
+    @us.destroy
     @teacher.destroy
     respond_to do |format|
       format.html { redirect_to teachers_url, notice: 'El docente se ha eliminado' }
@@ -72,13 +71,14 @@ class TeachersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_teacher
-      @teacher = Teacher.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def teacher_params
-      params.require(:teacher).permit(:name, :name1,:image, :lastname, :lastname1, :email, :direction, :fecha_nac, :tipo_id, :cedula, tel_teachers_attributes: [:id, :tipo, :numero, :_destroy])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_teacher
+    @teacher = Teacher.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def teacher_params
+    params.require(:teacher).permit(:name, :name1, :image, :lastname, :lastname1, :email, :direction, :fecha_nac, :tipo_id, :cedula, tel_teachers_attributes: %i[id tipo numero _destroy])
+  end
 end

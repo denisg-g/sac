@@ -5,18 +5,18 @@ class EvaluationsControllerTest < ActionController::TestCase
     @evaluation = evaluations(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:evaluations)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create evaluation" do
+  test 'should create evaluation' do
     assert_difference('Evaluation.count') do
       post :create, evaluation: { from: @evaluation.from, name: @evaluation.name, note_id: @evaluation.note_id, value: @evaluation.value }
     end
@@ -24,22 +24,22 @@ class EvaluationsControllerTest < ActionController::TestCase
     assert_redirected_to evaluation_path(assigns(:evaluation))
   end
 
-  test "should show evaluation" do
+  test 'should show evaluation' do
     get :show, id: @evaluation
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @evaluation
     assert_response :success
   end
 
-  test "should update evaluation" do
+  test 'should update evaluation' do
     patch :update, id: @evaluation, evaluation: { from: @evaluation.from, name: @evaluation.name, note_id: @evaluation.note_id, value: @evaluation.value }
     assert_redirected_to evaluation_path(assigns(:evaluation))
   end
 
-  test "should destroy evaluation" do
+  test 'should destroy evaluation' do
     assert_difference('Evaluation.count', -1) do
       delete :destroy, id: @evaluation
     end
