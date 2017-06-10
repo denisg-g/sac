@@ -38,6 +38,10 @@ gem 'paperclip', '~> 3.4.1'
 
 gem 'devise'
 
+
+#use for reports generates
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

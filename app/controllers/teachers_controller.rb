@@ -7,6 +7,15 @@ class TeachersController < ApplicationController
   # GET /teachers.json
   def index
     @teachers = Teacher.search(params[:search]).page(params[:page]).per(8).order('created_at DESC')
+
+    respond_to do |format|
+
+        format.html
+        format.pdf {render template: 'teachers/Reporte_teachers', pdf: 'Reporte_teachers' }
+        format.xls
+
+    end
+
   end
 
   # GET /teachers/1
@@ -16,7 +25,7 @@ class TeachersController < ApplicationController
   # GET /teachers/new
   def new
     @teacher = Teacher.new
-    @teacher.tel_teachers.build 
+    @teacher.tel_teachers.build
   end
 
   # GET /teachers/1/edit

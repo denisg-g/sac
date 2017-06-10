@@ -22,7 +22,18 @@ class StudentsController < ApplicationController
   end
 
   def index
+
+
     @students = Student.search(params[:search]).page(params[:page]).per(8).order('created_at DESC')
+
+
+    respond_to do |format|
+      format.html
+      format.pdf { render template: 'students/Reporte_students', pdf: 'Reporte_students' }
+      format.xls
+
+  end
+
   end
 
   # GET /students/1
