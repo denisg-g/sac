@@ -1,5 +1,3 @@
-
-
 <h1>Matrículas</h1>
 <%= paginate(@register) %>
 <table class="table table-bordered table-hover table-striped">
@@ -20,8 +18,8 @@
     <% @register.each do |register| %>
       <tr>
         <td><%= register.year %></td>
-        <td><%= register.student.nombre %> <%= register.student.nombre1 %> <%= register.student.apellido %> <%= register.student.apellido1 %></td>
-        <td><%= register.student.group.tname %></td>
+        <td><%= register.try(".student.nombre") %> <%= register.try(".student.nombre1") %> <%= register.try(".student.apellido") %> <%= register.try(".student.apellido1") %></td>
+        <td><%= register.try('student.group.tname') %></td>
         <td><%= register.colegio_precedencia %></td>
         <td><%= register.repitente %></td>
         <td><%= register.extracurricular %></td>

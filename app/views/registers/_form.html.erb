@@ -27,12 +27,20 @@
           <%= f.label :repitente %><br>
           <%= f.select :repitente,([  "Si", "No" ]),{}, {:class=> "form-control",:style=>"float:left" }%>
         </div>
+        <div class="field col-md-2">
+        <%= f.label :grupo %><br>
+            <select class="form-control"  name="student[group_id]" id="student_group_id">
+              <% @grupo.each do |g| %>
+                <option value="<%= g.id %>"><%= g.tname %></option>
+              <% end %>
+            </select>
+          </div>
         <div class="field col-md-3">
           <%= f.label :extracurricular %><br>
           <%= f.select :extracurricular,(["Ajedrez","Basquetball","Futbol","Ping Pong  ","VolleyBall"]),{},{:class=>"form-control"}%>
         </div>
       </div>
-    </div><!--  END NUEVO-->
+  </div><!--  END NUEVO-->
 
     <div role="tabpanel" class="tab-pane" id="reing">
       <div class="row">
@@ -45,10 +53,17 @@
        </div>
        <div id="studinfo" style="right:2000px;">
        </div>
-     </div>
+    </div>
      <div id="target">
      </div>
-
+     <div class="field col-md-3">
+        <%= f.label :grupo %><br>
+            <select class="form-control"  name="student[group_id]" id="student_group_id">
+              <% @grupo.each do |g| %>
+                <option value="<%= g.id %>"><%= g.tname %></option>
+              <% end %>
+            </select>
+          </div><br><br><br>
    </div><!-- END REING -->
 
     <% a = 1 %>
@@ -65,12 +80,6 @@
             <%= doc.label :descipcion  %><br>
           </div>
           <div class="col-md-3 field" id="selstus" style="z-index:-1000;">
-            <%= f.label :grupo %><br>
-            <select class="form-control"  name="student[group_id]" id="student_group_id">
-              <% @grupo.each do |g| %>
-                <option value="<%= g.id %>"><%= g.tname %></option>
-              <% end %>
-            </select>
           </div>
         </div>
         <script type="text/javascript">
@@ -85,7 +94,7 @@
         </script>
       <% end %>
       <% docu = @documentos.find(a).name %>
-        <div class="col-md-7" style="position:relative;bottom:40px;">
+        <div class="col-md-7" style="position:relative;bottom:0px;">
           <div class="field col-md-6">
             <%= doc.text_field :name ,:class=>"form-control",:autofocus=>"true" ,:disabled=>"true",:value=>docu%>
           </div>

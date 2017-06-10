@@ -36,7 +36,6 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-    @group.teacher_id = current_user.tipo.to_i
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Grupo Creado' }

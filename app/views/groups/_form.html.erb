@@ -1,19 +1,23 @@
 <%= form_for(@group) do |f| %>
  
 
-  <div class="field col-md-3">
+  <div class="field col-md-2">
     <%= f.label :Nombre %><br>
     <%= f.select :name,(["Primero","Segundo","Tercero","Cuarto","Quinto","Sexto","Séptimo","Octavo","Noveno","Décimo","Undécimo"]),{}, {:class=> "form-control",:style=>"float:left" }%>
   </div>
-  <div class="field col-md-3">
+  <div class="field col-md-2">
     <%= f.label :sección %><br>
     <%= f.select :seccion,(["A","B"]),{}, {:class=> "form-control",:style=>"float:left" }%>
   </div>
-  <div class="field col-md-3">
+  <div class="field col-md-2">
     <%= f.label :máximo_de_alumnos %><br>
-    <%= f.number_field :max,:class=>"form-control " %>
+    <%= f.number_field :max,:class=>"form-control ",:min=>0 %>
   </div>
   <div class="field col-md-3">
+    <%= f.label :Profesor_guía %><br>
+    <%= f.select :teacher_id  , options_for_select(Teacher.all.map{|s|[s.complete_name, s.id ]}),{},{:class=> "form-control",:style=>"float:left" } %>
+  </div>
+  <div class="field col-md-2">
     <%= f.label :turno %><br>
     <%= f.select :turno,(["Matutino","Vespertino"]),{}, {:class=> "form-control",:style=>"float:left" }%>
   </div>

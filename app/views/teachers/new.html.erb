@@ -1,5 +1,10 @@
-<h1>Nuevo Docente</h1>
-
+<h1>Nuevo Docente
+<div class="actions" style="float:right;position: relative;bottom: 8px;">
+  <a href="javascript:history.back()" class="btn" ><i class="fa-3x fa fa-arrow-circle-left"></i></a>
+  <button type="submit" class="btn" onclick="valida_teacher();" name="commit">
+      <i class="fa-arrow-circle-right fa-3x fa"></i>
+  </button>
+  </div></h1>
+  
 <%= render 'form' %>
 
-<a href="javascript:history.back()" class="btn btn-default btn-md" style="position:relative;top:-63px;left:20px;">Atrás</a>

@@ -16,7 +16,7 @@ class TeachersController < ApplicationController
   # GET /teachers/new
   def new
     @teacher = Teacher.new
-    2.times { @teacher.tel_teachers.build }
+    @teacher.tel_teachers.build 
   end
 
   # GET /teachers/1/edit
@@ -62,7 +62,7 @@ class TeachersController < ApplicationController
   # DELETE /teachers/1.json
   def destroy
     @us = User.find_by(tipo_id: @teacher.id)
-    @us.destroy
+    @us.try(:destroy)
     @teacher.destroy
     respond_to do |format|
       format.html { redirect_to teachers_url, notice: 'El docente se ha eliminado' }
