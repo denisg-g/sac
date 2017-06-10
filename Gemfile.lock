@@ -112,6 +112,7 @@ GEM
       ast (~> 2.2)
     pg (0.18.4)
     powerpack (0.1.1)
+    puma (3.9.1)
     rack (1.6.4)
     rack-mini-profiler (0.10.2)
       rack (>= 1.2.0)
@@ -212,6 +213,7 @@ DEPENDENCIES
   kaminari-bootstrap
   paperclip (~> 3.4.1)
   pg (~> 0.15)
+  puma
   rack-mini-profiler
   rails (= 4.2.6)
   rails_12factor

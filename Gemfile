@@ -45,6 +45,7 @@ gem 'devise'
 # gem 'capistrano-rails', group: :development
 
 gem 'rails_12factor', group: :production
+gem 'puma'
 gem 'unicorn'
 
 group :development, :test do
