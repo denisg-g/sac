@@ -12,9 +12,8 @@
   
   <%= f.fields_for :schedule_days do |sd| %>
     <div class="row">
-    
-    <div class="field">
-      <%= sd.select :name,(['Lunes','Martes','Miercoles','Jueves','Viernes' ]),{}, {:class=> "form-control",:style=> "width:20%" } %>
+
+      <%= sd.text_field :name, :value=> semana, :class=> "form-control",:style=> "width:20%"  ,:readonly => true%>
       <br class="separador">
     </div>
     

@@ -11,16 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419174033) do
+ActiveRecord::Schema.define(version: 20170613050337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "documents", force: :cascade do |t|
     t.string   "name"
@@ -91,6 +85,16 @@ ActiveRecord::Schema.define(version: 20170419174033) do
     t.integer  "schedule_day_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.boolean  "i"
+    t.boolean  "ii"
+    t.boolean  "iii"
+    t.boolean  "iv"
+    t.boolean  "v"
+    t.boolean  "vi"
+    t.boolean  "vii"
+    t.boolean  "viii"
+    t.boolean  "ix"
+    t.boolean  "x"
   end
 
   add_index "schedule_blocks", ["schedule_day_id"], name: "index_schedule_blocks_on_schedule_day_id", using: :btree
@@ -100,6 +104,11 @@ ActiveRecord::Schema.define(version: 20170419174033) do
     t.integer  "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "monday"
+    t.boolean  "tuesday"
+    t.boolean  "wednesday"
+    t.boolean  "thursday"
+    t.boolean  "friday"
   end
 
   add_index "schedule_days", ["subject_id"], name: "index_schedule_days_on_subject_id", using: :btree
