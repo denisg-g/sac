@@ -9,25 +9,7 @@
     <%= f.label :group_id %><br>
     <%= f.text_field :group_id, :value => params[:group_id] %>
   </div>
-  
-  <%= f.fields_for :schedule_days do |sd| %>
-    <div class="row">
-
-      <%= sd.text_field :name, :value=> semana, :class=> "form-control",:style=> "width:20%"  ,:readonly => true%>
-      <br class="separador">
-    </div>
     
-    </div>
-    <div class="row" id="tel">
-    <%= sd.fields_for :schedule_blocks do |sb| %>
-      <div class="campos field ">
-      <%= sb.select :name,(['1','2','3','4','5','6','7','8' ]),{}, {:class=> "form-control",:style=>"float:left;width:10%" } %> 
-      <a href="javascript:;" onClick="remove_fieldss_sub(this);" style="height: 35px;width:5%;float:left;padding:0px;"><span style="width:100%;height: 100%;" class="fa fa-trash btn btn-default btn-md"></span></a>
-      
-     </div>
-    <% end %>
-    </div>
-    <% end %>
 <br><br>
   <div class="actions">
     <%= f.submit "Guardar",:class=>"btn-default btn btn-md",:style=>"position:relative;left:50px;"%>

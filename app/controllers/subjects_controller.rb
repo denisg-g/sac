@@ -16,10 +16,6 @@ class SubjectsController < ApplicationController
   # GET /subjects/new
   def new
     @subject = Subject.new
-    5.times do
-      dia = @subject.schedule_days.build
-      4.times { dia.schedule_blocks.build }
-    end
   end
 
   # GET /subjects/1/edit

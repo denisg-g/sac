@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613050337) do
+ActiveRecord::Schema.define(version: 20170614144356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,35 +80,13 @@ ActiveRecord::Schema.define(version: 20170613050337) do
     t.integer  "student_id"
   end
 
-  create_table "schedule_blocks", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "schedule_day_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.boolean  "i"
-    t.boolean  "ii"
-    t.boolean  "iii"
-    t.boolean  "iv"
-    t.boolean  "v"
-    t.boolean  "vi"
-    t.boolean  "vii"
-    t.boolean  "viii"
-    t.boolean  "ix"
-    t.boolean  "x"
-  end
-
-  add_index "schedule_blocks", ["schedule_day_id"], name: "index_schedule_blocks_on_schedule_day_id", using: :btree
-
   create_table "schedule_days", force: :cascade do |t|
     t.string   "name"
     t.integer  "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean  "monday"
-    t.boolean  "tuesday"
-    t.boolean  "wednesday"
-    t.boolean  "thursday"
-    t.boolean  "friday"
+    t.string   "dia"
+    t.integer  "bloque"
   end
 
   add_index "schedule_days", ["subject_id"], name: "index_schedule_days_on_subject_id", using: :btree
@@ -157,9 +135,11 @@ ActiveRecord::Schema.define(version: 20170613050337) do
     t.integer  "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "teacher_id"
   end
 
   add_index "subjects", ["group_id"], name: "index_subjects_on_group_id", using: :btree
+  add_index "subjects", ["teacher_id"], name: "index_subjects_on_teacher_id", using: :btree
 
   create_table "subjects_teachers", id: false, force: :cascade do |t|
     t.integer "subject_id"
@@ -247,9 +227,9 @@ ActiveRecord::Schema.define(version: 20170613050337) do
   add_foreign_key "evaluations", "notes"
   add_foreign_key "groups", "teachers"
   add_foreign_key "notes", "subjects"
-  add_foreign_key "schedule_blocks", "schedule_days"
   add_foreign_key "schedule_days", "subjects"
   add_foreign_key "subjects", "groups"
+  add_foreign_key "subjects", "teachers"
   add_foreign_key "tel_teachers", "teachers"
   add_foreign_key "tel_tutors", "tutors"
 end

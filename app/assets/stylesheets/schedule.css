@@ -1,0 +1,6 @@
+ul.grad{ 
+	list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; 
+}
+li.draggable { 
+	margin: 5px; padding: 5px; width: 100px; 
+}

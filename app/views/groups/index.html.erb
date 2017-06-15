@@ -63,7 +63,7 @@
                 <h4 class="modal-title" id="myModalLabel">Materias para <%= group.name %> <%= group.seccion %></h4>
               </div>
               <div class="modal-body">
-              <table class="table">
+              <table class="table table-bordered">
               <thead>
                 <tr>
                   <th></th>
@@ -74,88 +74,60 @@
                   <th>Viernes</th>
                 </tr>
               </thead>
-              <% conta = 0 %>
-              <% array = Array.new(7){Array.new(5)} %>
-              <% group.subjects.each do |mat| %>
-                <% mat.schedule_days.each do |sd| %>
-                  <% sd.schedule_blocks.each do |sb| %>
-
-                    
-                    <% if sd.name == "Lunes" %>
-                      <% array[0][sb.name.to_i-1] = mat.name %>
-                    <% end %>
-                    <% if sd.name == "Martes"  %>
-                      <% array[1][sb.name.to_i-1] = mat.name %>
-                    <% end %>
-                    <% if sd.name == "Miercoles" %>
-                      <% array[2][sb.name.to_i-1] = mat.name %>
-                    <% end %>
-                    <% if sd.name == "Jueves"  %>
-                      <% array[3][sb.name.to_i-1] = mat.name %>
-                    <% end %>
-                    <% if sd.name == "Viernes" %>
-                      <% array[4][sb.name.to_i-1] = mat.name %>
-                    <% end %>
-                    
-                  <% end %>
-                
-                <% end %>
-
-              <% end %>
               <tbody>
               <tr>
               <td>1 </td>
-              <td><%= array[0][0]  %></td>
-              <td><%= array[1][0]  %></td>
-              <td><%= array[2][0]  %></td>
-              <td><%= array[3][0]  %></td>  
-              <td><%= array[4][0]  %></td>
+              <td class="droppable"><p></p></td>
+              <td class="droppable"><p></p></td>
+              <td class="droppable"><p></p></td>
+              <td class="droppable"><p></p></td>  
+              <td class="droppable"><p></p></td>
               </tr>
               <tr>
               <td>2 </td>
-              <td><%= array[0][1]  %></td>
-              <td><%= array[1][1]  %></td>
-              <td><%= array[2][1]  %></td>
-              <td><%= array[3][1]  %></td>  
-              <td><%= array[4][1]  %></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>  
+              <td class="droppable"></td>
               </tr>
               <tr>
               <td>3 </td>
-              <td><%= array[0][2]  %></td>
-              <td><%= array[1][2]  %></td>
-              <td><%= array[2][2]  %></td>
-              <td><%= array[3][2]  %></td>  
-              <td><%= array[4][2]  %></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
               </tr>
               <tr>
               <td>4 </td>
-              <td><%= array[0][3]  %></td>
-              <td><%= array[1][3]  %></td>
-              <td><%= array[2][3]  %></td>
-              <td><%= array[3][3]  %></td>  
-              <td><%= array[4][3]  %></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
               </tr>
               <tr>
               <td>5 </td>
-              <td><%= array[0][4]  %></td>
-              <td><%= array[1][4]  %></td>
-              <td><%= array[2][4]  %></td>
-              <td><%= array[3][4]  %></td>  
-              <td><%= array[4][4]  %></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
               </tr>         
               <td>6 </td>
-              <td><%= array[0][5]  %></td>
-              <td><%= array[1][5]  %></td>
-              <td><%= array[2][5]  %></td>
-              <td><%= array[3][5]  %></td>  
-              <td><%= array[4][5]  %></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
               </tr>  
               <td>7 </td>
-              <td><%= array[0][6]  %></td>
-              <td><%= array[1][6]  %></td>
-              <td><%= array[2][6]  %></td>
-              <td><%= array[3][6]  %></td>  
-              <td><%= array[4][6]  %></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
+              <td class="droppable"></td>
               </tr> 
               
               
@@ -165,8 +137,12 @@
               
               </tbody>
               </table>
-                
-                
+                <% group.subjects.each do |mate| %>
+
+                <ul class="grad">
+                  <li class="draggable ui-state-highlight"><%= mate.name %></li>
+                </ul>
+                <% end %>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
